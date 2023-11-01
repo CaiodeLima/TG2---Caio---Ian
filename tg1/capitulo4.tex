@@ -1,0 +1,40 @@
+% ----------------------------------------------------------
+\chapter{Ambientes}
+% ----------------------------------------------------------
+
+Este modelo disponibiliza alguns ``ambientes'', ou seja, caixas de texto com formatação especial para certos tipos de elementos que são automaticamente numerados (e.g. \cref{prop:WYSIWYG}, \cref{thm:WYSIWYG}, etc.). Esses ambientes foram adaptados para o UnB\TeX\ a partir soluções utilizadas por \citeonline{Castro2019}.
+
+\section{Exemplos de ambientes disponíveis}
+
+\begin{definition}
+O WYSIWYG (ou ``What You See Is What You Get - O que você vê é o formato final'') é um tipo de editor HTML que permite editar sua página da Web em uma visualização simplificada e sem código de aparência semelhante à do layout da página real.
+\end{definition}
+
+\begin{proposition}\label{prop:WYSIWYG}
+    \LaTeX\ produz equações mais bonitas que qualquer editor WYSIWYG.
+\end{proposition}
+
+\begin{lemma}
+    Teste
+\end{lemma}
+
+\begin{remark}
+    \LaTeX\ produz equações mais bonitas que qualquer editor WYSIWYG.
+\end{remark}
+
+\begin{theorem}[Teorema LaTeX-WYSIWYG]\label{thm:WYSIWYG}
+    Todo físico prefere usar código \LaTeX\ puro que qualquer editor WYSIWYG.
+\end{theorem}
+
+\begin{corollary}
+    Teste
+\end{corollary}
+
+\begin{proof}
+    Físicos gostam de equações bonitas. Editores What-You-See-Is-What-You-Get não são apropriados para fazer equações bonitas.\footnote{É certo que há editores WYSIWYG baseados em \LaTeX, mas eles não nos dão o mesmo nível de controle.} Logo, se algum físico preferisse usar um editor WYSIWYG no lugar de \LaTeX, não seria muito inteligente. Como todo físico é inteligente, o teorema está demonstrado \textit{ad absurdum}.
+\end{proof}
+
+\begin{example}
+    Einstein usaria um editor WYSIWYG ou \LaTeX? \\
+    Einstein era físico. Portanto, usando o teorema LaTeX-WYSIWYG, concluímos que ele usaria \LaTeX.
+\end{example}

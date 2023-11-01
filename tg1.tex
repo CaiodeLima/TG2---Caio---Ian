@@ -1,0 +1,449 @@
+%%
+%% UnBTeX: A class for bachelor, master, and doctoral thesis at the
+%% University of Brasilia (UnB), Brazil
+%% Version 1.3.2 2023/10/20
+%% Copyright (C) 2021-2023 by Henrique C. Ferreira <hcferreira@unb.br>
+%%
+%% This class file may be distributed and/or modified under the conditions
+%% of the LaTeX Project Public License, either version 1.3 of this license
+%% or (at your option) any later version. The latest version of this
+%% license is in:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.3 or later is part of all distributions of LaTeX version
+%% 2005/12/01 or later.
+%%
+%% This file is a template for use with the UnBTex class
+%% To compile the document you should call pdflatex, bibtex, pdflatex
+%% 
+
+\documentclass[
+	% -- opções da classe memoir -- https://www.ctan.org/pkg/memoir
+	12pt,				% tamanho da fonte
+	openright,			% capítulos começam em página ímpar
+	                    % (insere página vazia caso preciso)
+	oneside,			% caso queira imprimir em frente e verso, use
+	%twoside,
+	a4paper,			% tamanho do papel.
+	sumario=tradicional,
+	% -- opções do pacote babel --
+	english,           % o idioma do texto não é definido aqui (mantenha as oções english e brazil)
+	brazil             % para trabalhos em inglês, altere o idioma após o comando \begin{document}
+	]{unbtex}
+
+% ---
+% Pacotes básicos (Adicione abaixo pacotes úteis para o seu trabalho)
+% ---
+
+% Bibliografia nas normas da ABNT, formato autor-data
+% O formato autor-data facilita a leitura, sobretudo de trabalhos com muitas páginas
+\RequirePackage[english,brazilian,hyperpageref]{backref}	 % Paginas com as citações na lista de referências
+\RequirePackage[alf,abnt-etal-list=0,abnt-etal-cite=3,bibjustif]{abntex2cite}
+
+% Referências cruzadas automáticas, dependendo do tipo de referência (figuras, tabelas, equações, etc.)
+\RequirePackage[nameinlink,noabbrev,english,brazilian]{cleveref}
+
+% ---
+% Compila o índice
+% ---
+\makeindex
+% ---
+
+% ---
+% Compila lista de siglas de siglas e abreviaturas e lista de símbolos
+% ---
+\RequirePackage[refpage]{nomencl}   % Para gerar lista de siglas e abreviações e lista de símbolos
+\newcommand{\makenomencl}{
+\makenomenclature
+\renewcommand{\nomname}{\listadesiglasname}
+\def\pagedeclaration##1{\dotfill\hyperlink{page.##1}{\nobreakspace##1}\par}
+\renewcommand{\nomgroup}[1]{%
+    % A primeira lista é a de abreviaturas e siglas
+    \ifstrequal{##1}{A}{\vspace{-36pt}
+    \item[]%
+    }{%
+    \ifstrequal{##1}{B}{
+    % Força a criação de uma nova lista, a lista de símbolos
+    \cleardoublepage\chapter*{\hspace{-\leftmargin}\listadesimbolosname}
+    % Cria o grupo de símbolos romanos
+    \item[{\bfseries\color{verdeunb}\sffamily\large Símbolos romanos}]}{}
+    }{%
+    \ifstrequal{##1}{C}{\vspace{20pt}
+    % Cria o grupo de símbolos gregos
+    \item[{\bfseries\color{verdeunb}\sffamily\large Símbolos gregos}]
+    }{}
+    }{%
+    \ifstrequal{##1}{D}{\vspace{20pt} \item[{\bfseries\color{verdeunb}\sffamily\large Nome do grupo}]}{}}%
+    \hspace*{-\leftmargin}\vspace{12pt}%
+} % Os nomes (e quantidade) dos subgrupos da lista de símbolos pode ser customizados
+% https://tex.stackexchange.com/questions/257076/customize-vertical-space-of-entries-and-subgroup-names-in-nomenclature
+}
+
+% ---
+% Compila a nomenclatura
+% ---
+\makenomencl
+% ---
+
+% Diretório das figuras
+\graphicspath{{unbtex-example/figuras/}}
+% --- 
+
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% Informações do trabalho
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+
+% Título (no idioma do texto)
+\titulo{Sistema baseado em machine learning \\ para classificação de queimadas ao longo do \\ território brasileiro utilizando dados de satélites} % insira \\ para forçar quebras de linha no título
+% Não utilize caixa alta para o título do trabalho e nem das seções (com exceção de siglas)
+% Em inglês caso o trabalho seja em inglês.
+\tituloestrangeiro{}
+% Obrigatório título em português caso o texto do trabalho seja em inglês (caso contrário, deixe vazio)
+
+% Autores
+\autori[]{Caio}{de Lima Saigg} % \autori[]{Nome}{Sobrenome}
+% No caso de nomes como Carlos de Souza, utilize \autori[]{Carlos de}{Souza} (e não \autori[]{Carlos}{de Souza})
+\autorii[]{Ian}{Porto e Mello} % deixe os argumentos vazios se não tiver segundo autor
+
+% Orientadores
+\orientador[Prof. Dr.]{Edson}{Mintsu Hung} % É possível alterar o gênero para orientadora mais abaixo, após o comando \begin{document}
+\coorientador[Prof. Dr.]{}{} % deixe os argumentos vazios se não tiver coorientador 
+% É possível alterar o gênero para coorientadora mais abaixo, após o comando \begin{document}
+
+% Tipo de trabalho
+\tipotrabalho{Projeto Final de Curso} % Dissertação de Mestrado; Tese de Doutorado (em português, mesmo que o trabalho seja em inglês)
+\tipocurso{Engenharia de Controle e Automação} % Programa de Pós-Graduação em Engenharia Elétrica (em português, mesmo que o trabalho seja em inglês)
+\preambulo{Projeto Final de Curso submetido como requisito parcial para obtenção do grau de Engenheiro de Controle e Automação} % Texto que aparece na folha de rosto e na folha de aprovação. Pode variar, por exemplo, de acordo com o tipo de trabalho (Trabalho de Conclusão de Curso, Dissertação de Mestrado, Tese de Doutorado), do grau (Bacharel, mestre, doutor) e do curso. Consulte a secretaria/coordenação do curso para saber o que deve ser escrito no preâmbulo. Use português mesmo que o trabalho seja em inglês.
+
+% Instituição
+\instituicao[Universidade de Brasília]{Faculdade de Tecnologia}{}
+%\instituicao[Universidade de Brasília]{Faculdade de Tecnologia}{Departamento de Engenharia Elétrica}  % comente a linha acima e retire o comentário desta linha caso queira incluir o departamento da unidade acadêmica
+% Use português mesmo que o trabalho seja em inglês.
+
+% Local e data
+\local{Brasília}
+\dia{29}
+\mes{julho}
+\ano{2022}
+
+% Palavras-chave (pelo menos três devem ser informadas)
+\pchavei{Monitoramento da Amazônia}
+\kwordi{Amazon Monitoring}
+\pchaveii{Aprendizado de máquina}
+\kwordii{Machine Learning}
+\pchaveiii{Queimadas}
+\kwordiii{Fire} % deixar vazio se não tiver
+
+% Código Cutter para a ficha catalográfica:
+% A ficha catalográfica deve conter o código Cutter, que pode ser obtido com a ajuda de alguns sites da internet (por exemplo, https://www.tabelacutter.com/). O sobrenome do primeiro autor é associado a um número com dois ou três dígitos, que deve ser utilizado como argumento do comando \numerocutter presente no arquivo *.tex principal do relatório. No caso de nomes como Carlos de Souza, utilize 'Souza, Carlos de' (e não 'de Souza, Carlos') para gerar o código.
+% Quando compilar o arquivo, a ficha catalográfica gerada terá antes e depois do número de dois ou três dígitos, a primeira letra do sobrenome (em maiúsculo) e a primeira letra do título do trabalho (em minúscula), respectivamente.
+\numerocutter{769} % Correspondente à entrada: Lisboa, Carlos
+
+% Membros da banca
+\membrodabancai{Prof. Dr. Edson Mintsu Hung, UnB/FT/ENE} % Membro 1 - Geralmente é o orientador
+\membrodabancaifuncao{Orientador} % Em português mesmo que o trabalho seja em inglês.
+\membrodabancaii{Prof. Dr. } % Membro 2
+\membrodabancaiifuncao{Examinador interno}
+\membrodabancaiii{Prof. Dr. } % Membro 3
+\membrodabancaiiifuncao{Examinador interno}
+\membrodabancaiv{} % deixar vazio se não tiver o quarto membro
+\membrodabancaivfuncao{Examinador externo}
+\membrodabancav{} % deixar vazio se não tiver o quarto membro
+\membrodabancavfuncao{Examinador externo}
+% ---
+
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% Início do documento
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+\begin{document}
+
+% Alterar para o idioma no qual o trabalho será escrito
+\selectlanguage{brazil}
+%\selectlanguage{english} % Para trabalhos escritos em inglês, é obrigatório conter um apêndice com resumo estendido em língua portuguesa.
+
+\IfStrEq*{\languagename}{brazil}{
+\thmnamebr
+\renewcommand{\bibname}{Referências}
+\renewcommand{\lstlistingname}{Código}
+\renewcommand{\orientadorname}{Orientador} % O gênero pode ser alterado para Orientadora
+\renewcommand{\coorientadorname}{Coorientador} % O gênero pode ser alterado para Coorientadora
+\renewcommand{\anexoname}{Anexo}
+\renewcommand{\apendicename}{Apêndice}
+}{
+\thmnameen
+\renewcommand{\bibname}{References}
+\renewcommand{\lstlistingname}{Code}
+\renewcommand{\orientadorname}{Orientador} % O gênero pode ser alterado para Orientadora. Não alterar para Supervisor/Advisor, mesmo que o trabalho seja em inglês.
+\renewcommand{\coorientadorname}{Coorientador} % O gênero pode ser alterado para Coorientadora. Não alterar para Co-Supervisor/Co-Advisor, mesmo que o trabalho seja em inglês.
+\renewcommand{\anexoname}{Annex}
+\renewcommand{\apendicename}{Appendix}
+}
+
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+
+\IfStrEq*{\languagename}{brazil}{
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na p. #2.%
+	\else
+		Citado nas pp. #2.%
+	\fi}%
+ }{
+\renewcommand*{\backrefalt}[4]{%
+    \ifcase #1 %
+        No citations.%
+    \or
+        Cit. on p. #2.%
+    \else
+        Cit. on pp. #2.%
+    \fi}
+}
+% ---
+
+% ------------------------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ------------------------------------------------------------------------
+\pretextual
+% ------------------------------------------------------------------------
+
+% ---
+% Insere capa
+% ---
+\imprimircapa
+% ---
+
+% ---
+% Insere folha de rosto
+% ---
+\imprimirfolhaderosto*
+% ---
+
+% ---
+% Insere ficha bibliográfica
+% ---
+\fichacatalografica
+% ---
+
+% ---
+% Insere folha de aprovação
+% ---
+\imprimirfolhadeaprovacao
+% ---
+
+% ---
+% Insere dedicatória (elemento opcional)
+% ---
+\begin{dedicatoria}
+   \centering
+   \vspace*{\fill}
+   
+   % Primeiro autor
+   \textit{Este trabalho é dedicado às crianças adultas que,\\
+   quando pequenas, sonharam em se tornar cientistas.} \\
+   
+   \ifthenelse{\equal{\autoriinome}{}}{}{
+   \vspace{1cm}
+   \autorinome\ \autorisobrenome \\
+   \vspace*{\fill}
+   
+   % Segundo autor
+    \textit{Dedicatória do segundo autor.} \\
+   
+   \vspace{1cm}
+   \autoriinome\ \autoriisobrenome
+   }
+   \vspace*{\fill}
+\end{dedicatoria}
+% ---
+
+% ---
+% Insere agradecimentos (elemento opcional)
+% ---
+\begin{agradecimentos}
+
+% Primeiro autor
+Agradecemos ao Dr. Lauro César Araujo e equipe que desenvolveram a classe \abnTeX, que pôde ser facilmente customizada para escrita de trabalhos acadêmicos na Universidade de Brasília que atendessem não só as normas da ABNT, como também regras e necessidades específicas de cursos de graduação e pós-graduação.
+
+Agradecemos também ao Prof. Dr. Leonardo Luiz e Castro pelo modelo em \LaTeX\ para livro para editora UnB, com diversas customizações que foram adaptadas para o UnB\TeX.
+% ---
+
+\ifthenelse{\equal{\autoriinome}{}}{}{
+\vspace{1cm}
+\hfill \autorinome\ \autorisobrenome
+\vspace{1cm}
+
+% Segundo autor
+Agradecimentos do segundo autor.
+% ---
+
+\vspace{1cm}
+\hfill \autoriinome\ \autoriisobrenome
+}
+
+\end{agradecimentos}
+% ---
+
+% ---
+% Insere epígrafe (elemento opcional)
+% ---
+\begin{epigrafe}
+    \vspace*{\fill}
+	\begin{flushright}
+		\textit{``If you find that you're spending almost all your time on theory,\\ start turning some attention to practical things; \\ it will improve your theories.\\ If you find that you're spending almost all your time on practice, \\ start turning some attention to theoretical things; \\ it will improve your practice.''\\
+		(Donald Knuth)}
+	\end{flushright}
+\end{epigrafe}
+% ---
+
+% ---
+% Insere resumos
+% ---
+
+% Resumo em português
+\newcommand{\imprimirresumo}{
+\newpage
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+\begin{resumo}[Resumo]
+% ---
+O trabalho propõe o desenvolvimento de um algoritmo baseado em inteligência artificial para monitoramento de incêndios no território da Amazônia Legal, como ferramenta de auxílio para a tomada de ações de preservação e combate a ações ilegais em tempo real. O uso de aprendizado de máquina foi escolhido por ser um método comprovadamente eficaz em projetos de proteção ambiental, que permite rápido reconhecimento de novos eventos com base em informações históricas. O trabalho foca na classificação de incêndios, e para isso os modelos são treinados com uma base de dados pública que não fornece informações em tempo real, mas possui a classificação para diversas queimadas ocorridas nos últimos anos.
+% ---
+\vspace{\onelineskip}
+
+\noindent
+\textbf{Palavras-chave}: \pchaveinome. \pchaveiinome. \pchaveiiinome. \ifthenelse{\equal{\pchaveivnome}{}}{}{\pchaveivnome.}
+\end{resumo}}
+
+% Resumo em inglês
+\newcommand{\imprimirabstract}{
+\newpage
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+\begin{resumo}[Abstract]
+\begin{otherlanguage*}{english}
+% ---
+This work proposes the development of an algorithm based on artificial intelligence for monitoring forest fires in the territory of the Legal Amazon, as an aid tool for taking preservation actions and combating illegal actions in real time. The use of machine learning was chosen for being a proven effective method in environmental protection projects, which allows fast recognition of new events based on historical information. The work focuses on the classification of fires, and for this the models are trained with a public database that does not provide real-time information, but has the classification for several fires that occurred in recent years.
+% ---
+\vspace{\onelineskip}
+ 
+\noindent 
+\textbf{Keywords}: \kwordinome. \kwordiinome. \kwordiiinome. \ifthenelse{\equal{\kwordivnome}{}}{}{\kwordivnome.}
+\end{otherlanguage*}
+\end{resumo}}
+% ---
+
+\IfStrEq*{\languagename}{english}{
+\imprimirabstract
+\imprimirresumo}{
+\imprimirresumo
+\imprimirabstract}
+
+% ---
+% Insere lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+% ---
+% Insere lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+
+% ---
+% Insere as listas de abreviaturas e siglas e de símbolos
+% ---
+%{\SingleSpacing
+\setlength{\nomitemsep}{-\parsep}
+\printnomenclature[1.2cm]
+% A opção do comando \printnomenclature define a largura da primeira coluna das listas
+\cleardoublepage
+% ---
+
+% ---
+% Insere o sumário
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+% ------------------------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ------------------------------------------------------------------------
+\textual
+% ------------------------------------------------------------------------
+
+% ---
+% Capítulo de introdução
+% ---
+\include{tg1/1-introducao}
+% ---
+\include{tg1/2-relacionados}
+\include{tg1/3-fundamentacao}
+\include{tg1/4-banco}
+\include{tg1/5-resultados}
+% ------------------------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ------------------------------------------------------------------------
+\postextual
+% ------------------------------------------------------------------------
+
+% ---
+% Referências bibliográficas
+% ---
+% Seleciona o arquivo de estilo de citações
+\IfStrEq*{\languagename}{english}{
+\bibliographystyle{abntex2eng-alf}
+}{
+\bibliographystyle{abntex2-alf}
+}
+% Arquivos com as referências bibliográficas
+\bibliography{tg1/referencias,tg1/references}
+
+% ---
+% Apêndices
+% ---
+
+\begin{apendicesenv}
+
+% Imprime uma página indicando o início dos apêndices
+\partapendices
+
+\include{tg1/apendice-a}
+
+%\include{tg1/apendice-b}
+
+\end{apendicesenv}
+% ---
+
+% ---
+% Anexos
+% ---
+
+\begin{anexosenv}
+
+% Imprime uma página indicando o início dos anexos
+\partanexos
+
+\include{tg1/anexo-a}
+
+\include{tg1/anexo-b}
+
+\end{anexosenv}
+
+\end{document}
