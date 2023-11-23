@@ -35,9 +35,9 @@
 
 
 \subsection{LSTM}
-\todo{isso não era pra estar mais na fund. teorica? ta mt introdutorio para esta sessão né}
+\todo[inline]{isso não era pra estar mais na fund. teorica? ta mt introdutorio para esta sessão né}
 
-Redes Neurais LSTM (Long Short-Term Memory) são uma classe de redes neurais recorrentes que foram projetadas para lidar com problemas de previsão de série temporal, como a previsão de bolsa de valores, clima, tráfego e outras sequências temporais. Uma das principais características das redes LSTM é sua capacidade de manter informações a longo prazo, enquanto descartando informações irrelevantes, como descrito em "LSTM: A Search Space Odyssey" de Klaus Greff et al. Isso é alcançado através da introdução de portas de controle de esquecimento e de atualização, que permitem ao modelo decidir quais informações manter e quais descartar.
+Redes Neurais LSTM (Long Short-Term Memory) são uma classe de redes neurais recorrentes que foram projetadas para lidar com problemas de previsão de série temporal, como a previsão de bolsa de valores, clima, tráfego e outras sequências temporais. Uma das principais características das redes LSTM é sua capacidade de manter informações a longo prazo, enquanto descartando informações irrelevantes \cite{lstm-}. Isso é alcançado através da introdução de portas de controle de esquecimento e de atualização, que permitem ao modelo decidir quais informações manter e quais descartar.
 
 O funcionamento das células LSTM consiste em três componentes: entrada, esquecimento e saída. A entrada é a informação que será processada pela célula, o esquecimento é o processo que controla quais informações serão retidas e quais serão descartadas e a saída é a informação transmitida para a próxima célula ou para a camada de saída da rede.
 
@@ -76,9 +76,50 @@ Podemos descrever o funcionamento do códigos de treinamento dos modelos por mei
 \todo{fluxograma do LSTM!!!}
 Os parâmetros utilizados para a função do \textit{Random Forest Classifier} foram os valores padrões utilizados pelo scikit-learn \cite{sklearnrfc}, com o objetivo de obter-se um primeiro resultado para o nosso modelo. Enquanto os parâmetros do MLP foram sendo definidos até que a rede apresentasse \textit{overfitting}, demonstrando capacidade de generalização. Após isto, os seus hiper-parâmetros foram ajustados até fossem atingidos os melhores resultados encontrados.
 
-\subsection{Lidando com Overfitting e Explosão de Gradiente}
+\subsection{Lidando com Overfitting}
+O problema de overfitting foi encontrado durante alguns testes como consequência do mal balanceamento do dataset. A classe 3, referente às queimadas de sub-bosque, representa 1.8\% do dataset, o que resulta em 0\% de acurácia para esta classe para um modelo treinando sem qualquer algoritmo de balanceamento.
+
+É comum na literatura encontrar exemplos de "data augmentation" \cite{survey_data_augmentation}. Trata-se de algoritmos capaz de expandir um dataset sem comprometer de forma significativa seu valor como dado de treinamento. Neste trabalho, optou-se por empregar uma redução de dados como estratégia de balanceamento. Esta estratégia envolve eliminar de forma aleatória dados de rótulos diferentes de forma a se aumentar a representação do tipo de dados de menor presença no dataset. Este tipo de estratégia acabou resultando em overfitting, conforme a imagem a seguir.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.5]{tg1/figuras/overfit.png}
+    \caption{Overfitting no treinamento}
+    \label{fig:overfitting}
+\end{figure}
+
+Na figura \ref{fig:overfitting} pode-se ver que embora a acurácia de treinamento esteja aumentando, a acurácia de validação não está melhorando. Dessa forma, pode-se dizer que a rede está se tornando "viciada" nos dados de treinamento e aprendendo a interpretá-los bem mas não está aprendendo a interpretar dados estranhos.
+
+Tendo em mãos estes resultados, optou-se por utilizar um leve balanceamento, aumentando a representatividade de 1.8\% para 5\%. Esta proporção foi obtida de forma empirica como um valor que representa uma melhora significativa na acurácia para a classe 3 porém sem reduzir demais a acurácia para as demais classes.
+
+
 \subsection{Organização em Série Temporal}
-\subsection{Serviores do Censipam}
+
+Transformar os dados existentes em uma série temporal envolve a adição de uma nova dimensão, a temporal. Em termos práticos, isto é efetuado por meio de uma dimensão acrescentada aos tensores dos dados transformando eventos discretos em dados sequenciais. 
+
+Os dados disponibilizados pelo CENSIPAM possuem identificadores rotulados como "id\_evento". Estes códigos agrupam diferentes detecções de incêndios como pertencentes a um mesmo foco de incêndio e é necessário para a transformação dos dados em uma série temporal. Em outras palavras, cada dados possui três dimensões: o ID representando o foco de incêndio, a quantidade de detecções relativas a este mesmo incêndio, e todos os dados de cada uma destas detecções.
+
+No entanto, esta abordagem envolve o desafio de transformar estes dados em tensores. Todo o código utilizado é construído a partir do Pytorch \cite{NEURIPS2019_9015}, que utiliza tensores como tipo de dado. Tensores são matrizes multi-dimensionais, apenas uma forma de se organizar dados de forma lógica. Por exemplo, pode-se imaginar um tensor tridimensional como um cubo, tratando-se de um tensor cujo as três dimensões são iguais.
+
+Em outras palavras, tensores são uma forma de se estruturar dados de forma regular, onde cada amostra de dados possui dimensões constantes e condizentes com as dimensões do tensor. No entanto, os dados em questão não são regulares pois são obtidos a partir de fenômenos aleatórios e caóticos, de queimadas sobre um território florestal de proporções continentais. Por isso é necessário o emprego de alguma técnica de tratamento de dados que possa regularizá-los, permitindo sua manipulação como tensores.
+
+\subsubsection{Padding}
+
+O desafio em questão é transformar dados de comprimento variado em dados padronizados com o mesmo comprimento, para que possam ser organizados como um tensor tridimensional. Dessarte, é necessário de se empregar um algoritmo capaz de preencher lacunas e eliminar excessos para garantir que todos os dados tenham as mesmas proporções.
+
+"\textit{Padding}" não se trata de um algoritmo específico, mas de qualquer algoritmo capaz de preencher lacunas para garantir regularidade entre dados. Tratando-se de séries temporais, os algoritmos de \textit{Padding} mais comuns envolvem preencher com zeros, com médias ou repetindo valores. Neste trabalho, optou-se por preencher as lacunas repetindo-se a última detecção do evento e eliminando as primeiras em casos de eventos muito grandes. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.5]{tg1/figuras/padding.png}
+    \caption{Representação de Padding}
+    \label{fig:padding}
+\end{figure}
+
+
+O motivo para esta escolha é dado pela observação do comportamento da saída da rede ao longo de cada passagem pelos dados. Observou-se que a rede tende ajustar sua saída rapidamente, dentro de 5 iterações, e a manter esta saída até o final, revelando que converge em um valor rapidamente. Logo, foram evitados algoritmos que causem ruído no início da série temporal, período de maior convergência do algoritmo.
+
+\subsection{Servidores do Censipam}
 \subsection{Funcionamento em Produção}
 \subsection{Treinamento x Produção}
 \subsection{}

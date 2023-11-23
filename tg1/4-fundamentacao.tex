@@ -8,11 +8,31 @@ Python é uma linguagem de programação de alto nível, orientada a objetos e i
 
 A linguagem é talvez a mais utilizada no campo de ciência da informação pois, além dos motivos já mencionados, possui diversos módulos de visualização de dados e que, somados à facilidade de leitura do código, proporciona uma visão clara dos dados, até para os não iniciados. Dessa forma, a linguagem é excelente para o desenvolvimento de aplicações de aprendizado de máquina, graças à facilidade da manipulação e visualização de dados e estatísticas e da alta integração com bibliotecas de desenvolvimento de modelos de inteligência artificial.
 
+\section{Scikit-Learn}
+
+Uma biblioteca para Python muito conhecida na área de ciência de dados e de aprendizado de máquinas \cite{sklearn_api}. O projeto de código aberto vem desenvolvendo algoritmos desde 2010, focando na manipulação e tratamento de dados, assim como no desenvolvimento de algoritmos de aprendizado de máquina \cite{scikit-learn}.
+
+O scikit-learn é uma ferramenta valiosa para cientistas de dados, engenheiros de aprendizado de máquina e pesquisadores que desejam explorar e aplicar técnicas de aprendizado de máquina e mineração de dados em seus projetos. Ele permite que os usuários construam, avaliem e ajustem modelos de machine learning de maneira eficaz e eficiente, tornando-o uma escolha popular no campo do processamento de dados e aprendizado de máquina.
+
+% \section{Tensorflow 2.0 \& Keras}
+% %\todo{PYTORCH}
+% Tensorflow 2.0 é uma plataforma de desenvolvimento de algoritmos de aprendizado de máquina em python. No mercado atual, é utilizado amplamente por grandes empresas devido a sua robustez e flexibilidade.  A plataforma é adequada ao uso por profissionais ou amadores, oferecendo um ecossistema capaz de satisfazer as necessidades de ambos \cite{tensorflow2015-whitepaper}.
+
+% Dentro do ecossistema mencionado, existe o módulo Keras. Esta biblioteca providencia uma interface de alto nível para o desenvolvimento de aplicações de aprendizado de máquina de forma fácil de intuitiva \cite{chollet2015keras}.
+
+\section{PyTorch}
+
+Trata-se de uma biblioteca para programação em Python de código aberto amplamente utilizada para o aprendizado de máquina e desenvolvimento de modelos de aprendizado profundo (deep learning) \cite{NEURIPS2019_9015}. Ele foi desenvolvido principalmente pelo Facebook's AI Research lab (FAIR) e é conhecido por sua flexibilidade e facilidade de uso, o que o tornou uma escolha popular entre pesquisadores e desenvolvedores de aprendizado profundo.
+
+O PyTorch fornece uma estrutura eficiente para realizar operações com tensores, que são essencialmente matrizes multidimensionais, semelhantes às matrizes NumPy. Ele oferece suporte para operações de álgebra linear e cálculo em GPUs, o que o torna adequado para tarefas de aprendizado profundo que envolvem grandes volumes de dados.
+
+Além disso, devido a sua comunidade grande e ativa e a sua flexibilidade, o PyTorch é uma ferramenta poderosa para produção de programas de aprendizado de máquina para as mais variadas aplicações.
+
 \section{Aprendizado de Máquina}
 
 No âmbito de inteligência artificial (IA), isto é, no desenvolvimento de sistemas que simulem a inteligência humana em máquinas ou computadores, existe o campo do Aprendizado de Máquina. Este campo também se dispõe a simular uma inteligência, porém a partir de um processo de treinamento de um algoritmo com um conjunto de dados de forma que o mesmo possa servir para interpretar novos conjuntos.
 
-Aprendizado de Máquina se trata de uma forma de estatística aplicada com a intenção de aproximar funções muito complexas \cite{GoodBengCour16}. Ou seja, é um campo do conhecimento focado no desenvolvimento de algoritmos que possuem uma alta capacidade de generalização após serem treinados a partir de um conjunto de dados. Algumas aplicações destes algoritmos incluem: classificação de conjuntos de dados, detecção de anomalias e regressão.
+Aprendizado de Máquina se trata de uma forma de estatística aplicada com a intenção de aproximar funções muito complexas \cite{GoodBengCour16}. Ou seja, é um campo do conhecimento focado no desenvolvimento de algoritmos que possuem uma alta capacidade de generalização após serem treinados a partir de um conjunto de dados. Algumas aplicações destes algoritmos incluem: classificação de conjuntos de dados, detecção de anomalias e regressão (modelamento matemático e previsão de valores).
 
 O campo do aprendizado de máquina teve origem nas décadas de 50 e 60, a partir do \textit{perceptron}, o primeiro modelo de aprendizado de máquina, modelado à imagem de um neurônio \cite{minsky69perceptrons}. Desde então, esta área da ciência vêm evoluindo e passou por uma série de  inovações significativas que reverberaram pela humanidade. Nesta linha, pode-se citar pontos marcantes em sua evolução como o aprendizado profundo, as redes convolucionais e as redes recorrentes, que baseiam o algoritmo desenvolvido neste trabalho.
 
@@ -62,6 +82,59 @@ Os dados normalmente são separados em conjuntos de dados de Treinamento e dados
 Um conjunto de dados de série temporal (ou "dataset" de série temporal) é uma coleção de informações organizadas de maneira sequencial, onde cada ponto de dados está associado a um período de tempo específico. Esse tipo de conjunto de dados é usado para registrar observações, medições ou valores ao longo do tempo. 
 Os datasets de séries temporais são frequentemente usados em análises estatísticas, modelagem preditiva e aprendizado de máquina para entender tendências, padrões sazonais e comportamentos ao longo do tempo.
 
+\subsection{\textbf{\textit{Overfitting}}}
+
+\textit{Overfitting}, ou sobreajuste em português, ocorre quando um modelo de machine learning se ajusta excessivamente aos dados de treinamento de maneira que ele passe a falsa impressão de que possui um alto rendimento, porém ao receber dados novos de entrada, a precisão da saída cai consideravelmente \cite{overftt}.
+
+\begin{figure}[htb]
+	\centering
+	\begin{minipage}{0.9\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{tg1/figuras/overfiting.png}
+		\caption{
+            \cite{overftt}} \label{fig:overftt}
+	\end{minipage}
+\end{figure}
+
+Na imagem \ref{fig:overftt} temos um exemplo de sobreajuste para um modelo de regressão, podemos deduzir do gráfico que a função encontrada é a que melhor minimiza a função de erro do modelo, porém ela certamente não é capaz de ser generalizada para novos dados.
+
+O \textit{overfitting} ocorre quando um modelo é treinado excessivamente nos dados de treinamento, capturando padrões específicos desses dados que não são generalizáveis para novos dados. O modelo acaba por incorporar o ruído dos dados de entrada, levando a previsões imprecisas quando o modelo é exposto a novos dados com ruído diferente.
+
+
+
+\subsection{\textbf{\textit{Random Forest - TIRA NÉ}}}
+
+Um modelo \textit{ensemble}, isto é, um algoritmo que emprega várias cópias do mesmo modelo operando em paralelo. O \textit{Random Forest} produz várias árvores de decisão independentes que processam os dados fornecidos e produzem um resultado final, isto é, cada árvore faz sua classificação ou regressão. A partir disso, o resultado final é decidido por meio de uma "eleição" entre
+a saída de todas as árvores. Este modelo é bastante empregado para algumas situações por demonstrar bons resultados a partir de dados categóricos, além de ser bem fácil de ser visualizado e interpretado por ser semelhante a uma árvore de cabeça para baixo \cite{oreillyML}.
+
+Cada árvore de decisão é construída dividindo os dados em nós de decisão com base em características específicas. A seleção das características é feita de forma aleatória, o que impede que uma árvore dependa excessivamente de uma única característica, tornando o modelo mais robusto.
+
+\begin{figure}[htb]
+	\centering
+	\begin{minipage}{0.9\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{tg1/figuras/random.png}
+		\caption{Ilustração exemplo de um modelo Random Forest
+            \cite{rf_fig}} \label{fig:rfmodel}
+	\end{minipage}
+\end{figure}
+
+\subsection{\textbf{MLP (\textit{MutiLayer Perceptron - TIRA NÉ)}}}
+
+Caracterizado por camadas com vários nós, semelhantes a neurônios,
+com conexões entre si, semelhantes às sinapses. É o modelo mais comum das tais Redes Neurais, apresentando uma camada de entrada (Input Layer) e saída (Output Layer) e um número qualquer de camadas invisíveis (Hidden Layer) entre ambas \cite{hastie_09_elements-of.statistical-learning}.
+
+Cada "neurônio" do MLP processa uma combinação linear das saídas da camada anterior por meio de pesos (Weights), aplica uma função de ativação não linear (Activation Function), e passa o resultado para os neurônios na próxima camada.
+
+\begin{figure}[htb]
+	\centering
+	\begin{minipage}{0.9\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{tg1/figuras/Multi-Layer-Perceptron-MLP-diagram-with-four-hidden-layers-and-a-collection-of-single.png}
+		\caption{Ilustração exemplo de um modelo MLP
+            \cite{mlp_fig}} \label{fig:mlpmodel}
+	\end{minipage}
+\end{figure}
 
 \subsection{\textbf{LSTM (\textit{Long Short-Term Memory) }}}
 
@@ -80,25 +153,27 @@ Em questões práticas, a rede neural LSTM recebe três entradas: \textit{cell s
 
 Esta arquitetura de rede neural foi projetada para lidar problemas comuns em redes recorrentes, a explosão ou o desaparecimento do gradiente, a partir do uso das portas e células de memória. Trata-se de uma rede com a capacidade de separar informações irrelevantes, permitindo com que o gradiente não varie caso não seja necessário.
 
-\section{Scikit-Learn}
+\begin{figure}[htb]
+	\centering
+	\begin{minipage}{0.7\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{tg1/figuras/lstm.png}
+		\caption{Ilustração exemplo de uma célula de um modelo LSTM
+            \cite{lstm_fig}} \label{fig:lstmcell}
+	\end{minipage}
+\end{figure}
 
-Uma biblioteca muito conhecida na área de ciência de dados e de aprendizado de máquinas \cite{sklearn_api}. O projeto de código aberto vem desenvolvendo algoritmos desde 2010, focando na manipulação e tratamento de dados, assim como no desenvolvimento de algoritmos de aprendizado de máquina \cite{scikit-learn}.
+\begin{figure}[htb]
+	\centering
+	\begin{minipage}{0.6\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{tg1/figuras/lstm_arch.png}
+		\caption{Possíveis arquiteturas com LSTM
+            \cite{lstm_fig}} \label{fig:lstmarch}
+	\end{minipage}
+\end{figure}
 
-O scikit-learn é uma ferramenta valiosa para cientistas de dados, engenheiros de aprendizado de máquina e pesquisadores que desejam explorar e aplicar técnicas de aprendizado de máquina e mineração de dados em seus projetos. Ele permite que os usuários construam, avaliem e ajustem modelos de machine learning de maneira eficaz e eficiente, tornando-o uma escolha popular no campo do processamento de dados e aprendizado de máquina.
 
-% \section{Tensorflow 2.0 \& Keras}
-% %\todo{PYTORCH}
-% Tensorflow 2.0 é uma plataforma de desenvolvimento de algoritmos de aprendizado de máquina em python. No mercado atual, é utilizado amplamente por grandes empresas devido a sua robustez e flexibilidade.  A plataforma é adequada ao uso por profissionais ou amadores, oferecendo um ecossistema capaz de satisfazer as necessidades de ambos \cite{tensorflow2015-whitepaper}.
-
-% Dentro do ecossistema mencionado, existe o módulo Keras. Esta biblioteca providencia uma interface de alto nível para o desenvolvimento de aplicações de aprendizado de máquina de forma fácil de intuitiva \cite{chollet2015keras}.
-
-\section{PyTorch}
-
-Trata-se de uma biblioteca de código aberto amplamente utilizada para o aprendizado de máquina e desenvolvimento de modelos de aprendizado profundo (deep learning) \cite{NEURIPS2019_9015}. Ele foi desenvolvido principalmente pelo Facebook's AI Research lab (FAIR) e é conhecido por sua flexibilidade e facilidade de uso, o que o tornou uma escolha popular entre pesquisadores e desenvolvedores de aprendizado profundo.
-
-O PyTorch fornece uma estrutura eficiente para realizar operações com tensores, que são essencialmente matrizes multidimensionais, semelhantes às matrizes NumPy. Ele oferece suporte para operações de álgebra linear e cálculo em GPUs, o que o torna adequado para tarefas de aprendizado profundo que envolvem grandes volumes de dados.
-
-Além disso, devido a sua comunidade grande e ativa e a sua flexibilidade, o PyTorch é uma ferramenta poderosa para produção de programas de aprendizado de máquina para as mais variadas aplicações.
 
 \section{Evento de Fogo}
 
