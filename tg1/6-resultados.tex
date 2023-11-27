@@ -1,62 +1,42 @@
 \chapter{Resultados}
 \label{resultados}
 
-\section{Modelos}
-% \subsection{Random Forest}
-% \textit{Random Forest} é um dos modelos de algoritmo mencionado no capítulo \ref{fund_teo}. Modelos \textit{Random Forests} são escolhidos para produzir boas previsões que são fáceis de entender. O fato de que pode lidar com grandes conjuntos de dados com eficiência e fornecer um alto nível de precisão geral é uma das razões pelas quais o escolhemos como um dos nossos modelos de aprendizado de máquina.
+\section{Modelo}
+\todo[inline]{print do código no tema claro, com huperparâmetros}
 
-% \subsection{MLP}
+Abaixo encontra-se o código em Python da implementação de um módulo LSTM por meio do Pytorch.
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.5]{tg1/figuras/codigo.png}
+    \caption{Código do modelo LSTM}
+    \label{fig:codigo_lstm}
+\end{figure}
 
-% MLP é um modelo de perceptron mencionado no capítulo \ref{fund_teo}. Esta arquitetura é muito configurável, principalmente quando construída a partir de um framework como o Pytorch. No entanto, esta maleabilidade também proporciona muitos pontos de falha, como bugs ou dificuldades de implementação.
+Os hiperparâmetros são:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|c|l|}
+        \hline
+        \textbf{Parâmetros} & \textbf{Significado} & \textbf{Valor} \\
+        \hline
+        NUM\_LAYERS & Número de camadas & 2 \\
+        input\_dim & Dimensão da entrada (número de features) &  68\\
+        HIDDEN\_SIZE & Tamanho do estado oculto &  60\\
+        \hline
+    \end{tabular}
+    \caption{Parâmetros do Modelo}
+    \label{tab:hiperparametros}
+\end{table}
 
-% Redes como o MLP tendem a lidar melhor com dados contínuos e a terem dificuldades em interpretar dados categóricos, o que traz outros desafios na adaptação do conjunto de dados para esta arquitetura.
+Abaixo encontra-se o código do algoritmo de \textit{loss} implementada via Pytorch \cite{Lin_Goyal_Girshick_He_Dollar_2017}.
 
-
-% SUGESTÃO DO MLP 
-
-% Redes Neurais MLP (Multi Layer Perceptron) são uma classe de redes neurais feedforward, também conhecidas como redes neurais densas ou simplesmente como redes neurais. Elas são compostas por várias camadas ocultas, cada uma composta por vários neurônios conectados por pesos sinápticos, que são ajustados durante o treinamento da rede.
-
-% O funcionamento de uma rede neural MLP é simples: a entrada é passada através de cada camada da rede, sendo processada pelos neurônios de cada camada e transmitida para a próxima camada. A camada final é a camada de saída, que produz as previsões ou classificações para cada entrada.
-
-% As redes MLP são usadas para uma ampla gama de tarefas, incluindo classificação de imagens, processamento de linguagem natural, análise de sentimentos e muito mais. Elas também são úteis como modelos de base para outras técnicas de aprendizado de máquina, como as redes neurais convolucionais e as redes neurais recorrentes.
-
-% Em resumo, as redes neurais MLP são uma classe de redes neurais feedforward compostas por várias camadas ocultas, que são usadas para uma ampla gama de tarefas de aprendizado de máquina e são úteis como modelos de base para outras técnicas.
-
-% sUGESTAO COM REFERENCIAS
-
-% Redes Neurais MLP (Multi Layer Perceptron), também conhecidas como redes neurais densas ou simplesmente como redes neurais, são uma classe de redes neurais feedforward descritas detalhadamente em livros como "Redes Neurais - Uma Introdução" de Simon Haykin e "Deep Learning" de Ian Goodfellow, Yoshua Bengio e Aaron Courville. Estas redes são compostas por várias camadas ocultas, cada uma composta por vários neurônios conectados por pesos sinápticos, que são ajustados durante o treinamento da rede, descrito em detalhes em "Aprendizado de Máquina" de Tom Mitchell.
-
-% O funcionamento de uma rede neural MLP é simples: a entrada é passada através de cada camada da rede, sendo processada pelos neurônios de cada camada e transmitida para a próxima camada, como descrito em "Redes Neurais Artificiais" de Albert Orriols-Puig e Joan Cabestany. A camada final é a camada de saída, que produz as previsões ou classificações para cada entrada.
-
-% De acordo com "Aprendizado de Máquina" de Steven W. Rich et al., as redes MLP são usadas para uma ampla gama de tarefas, incluindo classificação de imagens, processamento de linguagem natural, análise de sentimentos e muito mais. Elas também são úteis como modelos de base para outras técnicas de aprendizado de máquina, como as redes neurais convolucionais e as redes neurais recorrentes, descrito em detalhes em "Deep Learning com Python" de François Chollet.
-
-% Em resumo, as redes neurais MLP são uma classe de redes neurais feedforward compostas por várias camadas ocultas, descritas em livros como "Redes Neurais - Uma Introdução" e "Deep Learning", que são usadas para uma ampla gama de tarefas de aprendizado de máquina e são úteis como modelos de base para outras técnicas, descritas em detalhes em "Aprendizado de Máquina" e "Deep Learning com Python".
-
-
-\subsection{LSTM}
-\todo[inline]{isso não era pra estar mais na fund. teorica? ta mt introdutorio para esta sessão né}
-
-Redes Neurais LSTM (Long Short-Term Memory) são uma classe de redes neurais recorrentes que foram projetadas para lidar com problemas de previsão de série temporal, como a previsão de bolsa de valores, clima, tráfego e outras sequências temporais. Uma das principais características das redes LSTM é sua capacidade de manter informações a longo prazo, enquanto descartando informações irrelevantes \cite{lstm-}. Isso é alcançado através da introdução de portas de controle de esquecimento e de atualização, que permitem ao modelo decidir quais informações manter e quais descartar.
-
-O funcionamento das células LSTM consiste em três componentes: entrada, esquecimento e saída. A entrada é a informação que será processada pela célula, o esquecimento é o processo que controla quais informações serão retidas e quais serão descartadas e a saída é a informação transmitida para a próxima célula ou para a camada de saída da rede.
-
-A vantagem desta arquitetura é que ela é capaz de lidar com dependências a longo prazo, ou seja, são capazes de lembrar informações relevantes ao longo de muitos passos no tempo, tornando-as muito úteis para a previsão de séries temporais.
-
-De acordo com "Sequence Modeling with Deep Learning", as redes LSTM são usadas em uma ampla gama de tarefas, incluindo previsão de séries temporais, processamento de linguagem natural e geração de texto. Elas também têm aplicações em sistemas de reconhecimento de fala e em modelos de tradução automática, descritos em "Deep Learning for Speech and Language Processing" de Daniel Jurafsky e James Martin.
-
-Em resumo, estas redes neurais são uma classe de redes neurais recorrentes projetadas para lidar com problemas de previsão de série temporal, baseadas em unidades LSTM que permitem que informações relevantes sejam retidas por períodos longos de tempo e informações irrelevantes sejam descartadas.
-
-% SUGESTAO
-
-% Redes Neurais LSTM (Long Short-Term Memory) são uma classe de redes neurais recorrentes descritas em detalhes em livros como "Deep Learning" de Ian Goodfellow, Yoshua Bengio e Aaron Courville e "Sequence Modeling with Deep Learning" de Jason Brownlee. Elas são usadas para processar sequências de dados, como séries temporais, texto e áudio, de forma mais eficaz do que as redes neurais MLP convencionais, descritas em "Redes Neurais - Uma Introdução" de Simon Haykin.
-
-% Uma das principais características das redes LSTM é sua capacidade de manter informações a longo prazo, enquanto descartando informações irrelevantes, como descrito em "LSTM: A Search Space Odyssey" de Klaus Greff et al. Isso é alcançado através da introdução de portas de controle de esquecimento e de atualização, que permitem ao modelo decidir quais informações manter e quais descartar.
-
-% De acordo com "Sequence Modeling with Deep Learning", as redes LSTM são usadas em uma ampla gama de tarefas, incluindo previsão de séries temporais, processamento de linguagem natural e geração de texto. Elas também têm aplicações em sistemas de reconhecimento de fala e em modelos de tradução automática, descritos em "Deep Learning for Speech and Language Processing" de Daniel Jurafsky e James Martin.
-
-% Em resumo, as redes neurais LSTM são uma classe de redes neurais recorrentes descritas em detalhes em livros como "Deep Learning" e "Sequence Modeling with Deep Learning", usadas para processar sequências de dados e manterem informações a longo prazo, enquanto descartando informações irrelevantes. Elas são usadas em uma ampla gama de tarefas, incluindo previsão de séries temporais, processamento de linguagem natural e reconhecimento de fala, descritos em "Sequence Modeling with Deep Learning" e "Deep Learning for Speech and Language Processing".
-
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.5]{tg1/figuras/loss.png}
+    \caption{Código do modelo de Loss Focal}
+    \label{fig:loss}
+\end{figure}
 
 \section{Metodologia}
 
@@ -119,12 +99,75 @@ O desafio em questão é transformar dados de comprimento variado em dados padro
 
 O motivo para esta escolha é dado pela observação do comportamento da saída da rede ao longo de cada passagem pelos dados. Observou-se que a rede tende ajustar sua saída rapidamente, dentro de 5 iterações, e a manter esta saída até o final, revelando que converge em um valor rapidamente. Logo, foram evitados algoritmos que causem ruído no início da série temporal, período de maior convergência do algoritmo.
 
+
 \subsection{Servidores do Censipam}
-\subsection{Funcionamento em Produção}
+
+A parceria com o CENSIPAM se deu com o intuito de integrar o modelo de aprendizado como uma ferramenta classificadora em seu sistema. Para isto, foi-se fornecido acesso a uma máquina por meio de tunelamento SSH para que o projeto tenha acesso ao banco de  dados em tempo real.
+
+Dessa forma, o código foi implementado no sistema para que rode continuamente. Atualmente, o programa aguarda até as 23 horas de cada dia para iniciar seu processamento. Neste momento, são requisitados os dados novos, referentes ao dia atual, e os dados antigos de mesmo ID, com apenas XXX features. A partir delas, o algoritmo de adição de features adiciona as demais. Em sequência, os dados passam pela etapa de pré-processamento, sendo normalizados e efetuado o padding. Por fim, o algoritmo de aprendizado de máquina classifica estes dados e monta arquivos dos tipos CSV e SHP com todos os dados classificados.
+
+\subsection{Dados de Treinamento e Dados em Produção}
+\todo[inline]{mostrar gráficos comparando ambos datasets}
+Os fornecidos para o treinamento do algoritmo e os dados obtidos em produção nos servidores são diferentes. Primeiramente, os dados de treinamento vão até o ano 2022 enquanto os dados disponíveis nos servidores se iniciam em 2023. Além disso, é interessante de se estudar a continuidade entre estes dados, de forma a garantir que sua qualidade é similar à dos dados utilizados no treinamento, ou se houve alguma mudança na forma como são produzidos, como por exemplo, mudança de métrica de metros para quilômetros.
+
+
 \subsection{Treinamento x Produção}
 \subsection{}
 
+\section{Métricas de Avaliação do Modelo}
 
+A avaliação de modelos de aprendizado de máquina é crucial para desenvolver um bom algoritmo de aprendizado de máquina. Métricas de avaliação fornecem uma medida objetiva do desempenho do modelo, permitindo comparações entre diferentes abordagens.
+
+No algoritmo de treinamento do modelo, separou-se o dataset entre validação e treinamento, sendo 80\% destinado para o treinamento e 20\% para a validação, separados cronologicamente. As métricas são obtidas de época em época e podem ser observadas por meio do módulo Tensorboard, disponível pelo Tensorflow \cite{tensorflow2015-whitepaper}, ou pelo terminal do programa como uma tabela ao finalizar-se o treinamento.
+
+Métricas são essenciais no ajuste fino dos hiper parâmetros do modelo de aprendizado de máquina. A partir deles, é possível diagnosticar problemas como \textit{overfitting} ou explosão de gradiente. Os dados gerados são acurácia, precisão, \textit{recall} e \textit{f-score} para cada classe e no total de forma ponderada. Além disso também são registrados os valores dos pesos dos nós da rede neural de forma a se observar explosões ou desaparecimentos de gradiente.
+
+\begin{figure}[ht]
+    \[F_{1} = \frac{2tp}{2tp + fp + fn}\]
+    \caption{Fórmula para \textit{F-score}}
+\end{figure}
+
+\begin{figure}[ht]
+    \[ \textit{recall} =  \frac{tp}{tp + fn}\]
+    \caption{Fórmula para \textit{recall}}
+\end{figure}
+
+Onde "tp" é quantidade de verdadeiros positivos, "fp" falsos positivos e "fn" falsos negativos. \textit{F-score} é uma métrica útil para medir o aprendizado da rede pois é uma forma de levar em consideração o desequilíbrio entre classes. Por exemplo, em uma tarefa de classificação cujo a classe 1 representa apenas 1\% dos dados teria uma acurácia de 99\% caso exibisse apenas a classe 0 como resultado, porém o \textit{F-score} traria um resultado péssimo, informando a falha da rede. Já o \textit{recall}, que é utilizado no cálculo do \textit{F-score}, mede a capacidade de um modelo identificar corretamente todos os exemplos positivos em um conjunto de dados. 
+
+\todo[inline]{inserir tabela com performance e prints do tensorboard}
+
+    
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        & Acurácia & Precisão & Recall & F1-Score \\
+        \hline
+        classe 1 & 0.795 & 0.904 & 0.795 & 0.846 \\
+        classe 2 & 0.804 & 0.772 & 0.804 & 0.788 \\
+        classe 3 & 0.290 & 0.237 & 0.289 & 0.261 \\
+        classe 4 & 0.620 & 0.485 & 0.619 & 0.544 \\
+        \hline
+        Ponderada & 0.767 & 0.786 & 0.767 & 0.774 \\
+        \hline
+    \end{tabular}
+
+
+    \vspace{10pt}
+    
+    \begin{tabular}{|c|c|}
+        \hline
+        Classe & Quantidade \\
+        \hline
+        classe 1 & 73647 \\
+        classe 2 & 64205 \\
+        classe 3 & 3136 \\
+        classe 4 & 19986 \\
+        \hline
+    \end{tabular}
+    \caption{Resultados da Avaliação}
+    \label{tab:resultados}
+\end{table}
 
 % \section{Evolução do modelo MLP}
 
