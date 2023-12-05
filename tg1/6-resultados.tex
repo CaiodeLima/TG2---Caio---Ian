@@ -1,8 +1,86 @@
 \chapter{Resultados}
 \label{resultados}
 
-\section{Modelo}
+\section{GFED}
+
+\subsection{\textit{Random Forest}}
+
+\textit{Random Forest} é um dos modelos de algoritmo mencionado no capítulo 3. Modelos
+\textit{Random Forest} são escolhidos para produzir boas previsões que são fáceis de entender. O fato de que pode lidar com grandes conjuntos de dados com eficiência e fornecer um alto nível de precisão geral é uma das razões pelas quais o escolhemos para verificar a eficácia de técnicas de aprendizado de máquina dentro do nosso problema.
+
+\subsection{\textit{Multi-Layer Perceptron}}
+
+MLP é um modelo de perceptron mencionado no capítulo 3. Esta arquitetura é muito
+configurável, principalmente quando construída a partir de um \textit{framework} como o Pytorch. No entanto, esta maleabilidade também proporciona muitos pontos de falha, como bugs ou dificuldades de implementação.
+
+Redes como o MLP tendem a lidar melhor com dados contínuos e a terem dificuldades
+em interpretar dados categóricos, o que traz outros desafios na adaptação do conjunto de
+dados para esta arquitetura.
+
+\subsection{Metodologia}
+
+Podemos descrever o funcionamento do códigos de treinamento dos modelos por meio do seguinte fluxograma, na figura \ref{fig:rfflux}:
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.98\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{tg1/figuras/fluxograma_gfed.png}
+		\caption{Fluxograma do funcionamento dos códigos de treinamento} \label{fig:rfflux}
+	\end{minipage}
+\end{figure}
+
+Os parâmetros utilizados para a função do \textit{Random Forest Classifier} foram os valores padrões utilizados pelo scikit-learn \cite{sklearnrfc}, com o objetivo de obter-se um primeiro resultado para o nosso modelo. Enquanto os parâmetros do MLP foram sendo definidos até que a rede apresentasse \textit{overfitting}, demonstrando capacidade de generalização. Após isto, os seus hiper-parâmetros foram ajustados até fossem atingidos os melhores resultados encontrados.
+
+\subsection{Desempenho}
+
+Na última etapa de calculo da precisão do modelo Random Forest, foi obtido os
+valores da tabela \ref{tab:rf} para quando classificamos o dataframe de validação. Já os valores para o MLP estão dispostos na tabela \ref{tab:mlp}.
+
+\begin{table}[H]
+\centering
+\caption{Precisão do Modelo Random Forest}
+\label{tab:rf}
+\begin{tabular}{lllll}
+Classe           & Precision & Recall & F1-score & Support \\
+0                & 1.00      & 1.00   & 1.00     & 124125  \\
+1                & 1.00      & 1.00   & 1.00     & 29652   \\
+2                & 0.84      & 0.73   & 0.78     & 1866    \\
+3                & 0.86      & 0.92   & 0.89     & 3615    \\  \cline{1-1}
+Acurácia         &           &        & 0.99     & 159258  \\
+Média aritmética & 0.92      & 0.91   & 0.92     & 159258  \\
+Média ponderada  & 0.99      & 0.99   & 0.99     & 159258 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Precisão do modelo MLP}
+\label{tab:mlp}
+\begin{tabular}{lllll}
+Classe          & Precision & Recall & F1-score & Support \\
+0               & 1.00      & 1.00   & 1.00     & 124125  \\
+1               & 0.98      & 1.00   & 0.99     & 29652   \\
+2               & 0.69      & 0.66   & 0.68     & 1866    \\
+3               & 0.79      & 0.84   & 0.81     & 3615    \\ \cline{1-1}
+Média ponderada & 0.99      & 0.99   & 0.99     & 159258 
+\end{tabular}
+\end{table}
+
+\subsection{Conclusões}
+
+Os resultados obtidos por meio da aplicação de dois modelos distintos de aprendizado de máquina, Random Forest e Multi-Layer Perceptron (MLP), na tarefa de classificação de queimadas na Amazônia, revelaram-se altamente promissores. Ambos os modelos demonstraram uma capacidade robusta de aprender padrões complexos nos dados, contribuindo para uma precisão notável na identificação de áreas afetadas por queimadas. Esses resultados preliminares destacam o potencial dessas técnicas de aprendizado de máquina na monitorização e prevenção de eventos de queimadas na Amazônia, representando um avanço significativo na aplicação de soluções inovadoras para desafios ambientais complexos.
+
+Confirmada a eficácia da utilização de \textit{machine learning} para o banco de dados do GFED, podemos então trazer nossa metodologia para o banco de dados do CENSIPAM, sobre o qual o nosso trabalho deverá operar para ser integralizado ao Painel do Fogo, trazendo também as \textit{features} de maior importância, as quais foram obtidas conforme está descrito na seção \ref{sec:features}.
+
+Em Bruno Scholles \cite{BrunoScholess2023} pode-se observar o desempenho do algoritmo de \textit{Random Forest} para a base de dados do Painel do Fogo. O trabalho aqui apresentado procura usufruir da vantagem fornecida de datação separada para cada detecção do evento dentro dessa base assim como ilustrado na figura \ref{fig:progressao}. Graças a isso, é possível testarmos a eficiência de um modelo do tipo LSTM para realizar a classificação de queimadas, analisando-as como uma série temporal.
+
+
+
+\section{LSTM}
 \todo[inline]{print do código no tema claro, com huperparâmetros}
+
+\subsection{Modelo}
 
 Abaixo encontra-se o código em Python da implementação de um módulo LSTM por meio do Pytorch.
 
@@ -38,24 +116,6 @@ Abaixo encontra-se o código do algoritmo de \textit{loss} implementada via Pyto
     \label{fig:loss}
 \end{figure}
 
-\section{Metodologia}
-
-
-%Por meio da biblioteca scikit-learn, é possível escrever um código simples que emprega o uso do modelo Random %Forest e com fácil customização. 
-
-Podemos descrever o funcionamento do códigos de treinamento dos modelos por meio do seguinte fluxograma, na figura \ref{fig:rfflux}:
-
-\begin{figure}[H]
-	\centering
-	\begin{minipage}{0.98\linewidth}
-		\centering
-		\includegraphics[width=\linewidth]{tg1/figuras/rfflux.png}
-		\caption{Fluxograma do funcionamento do código do Random Forest} \label{fig:rfflux}
-	\end{minipage}
-\end{figure}
-\todo{fluxograma do LSTM!!!}
-Os parâmetros utilizados para a função do \textit{Random Forest Classifier} foram os valores padrões utilizados pelo scikit-learn \cite{sklearnrfc}, com o objetivo de obter-se um primeiro resultado para o nosso modelo. Enquanto os parâmetros do MLP foram sendo definidos até que a rede apresentasse \textit{overfitting}, demonstrando capacidade de generalização. Após isto, os seus hiper-parâmetros foram ajustados até fossem atingidos os melhores resultados encontrados.
-
 \subsection{Lidando com Overfitting}
 O problema de overfitting foi encontrado durante alguns testes como consequência do mal balanceamento do dataset. A classe 3, referente às queimadas de sub-bosque, representa 1.8\% do dataset, o que resulta em 0\% de acurácia para esta classe para um modelo treinando sem qualquer algoritmo de balanceamento.
 
@@ -68,7 +128,7 @@ O problema de overfitting foi encontrado durante alguns testes como consequênci
     \label{fig:overfitting}
 \end{figure}
 
-Na figura \ref{fig:overfitting} pode-se ver que embora a acurácia de treinamento esteja aumentando, a acurácia de validação não está melhorando. Dessa forma, pode-se dizer que a rede está se tornando "viciada" nos dados de treinamento e aprendendo a interpretá-los bem mas não está aprendendo a interpretar dados estranhos.
+Na figura \ref{fig:overfitting} pode-se ver que embora a acurácia de treinamento esteja aumentando, a acurácia de validação não está melhorando. Dessa forma, pode-se dizer que a rede está se tornando "viciada" nos dados de treinamento, aprendendo a interpretá-los bem mas não se tornando capaz de prever dados diferentes deste.
 
 Tendo em mãos estes resultados, optou-se por utilizar um leve balanceamento, aumentando a representatividade de 1.8\% para 5\%. Esta proporção foi obtida de forma empirica como um valor que representa uma melhora significativa na acurácia para a classe 3 porém sem reduzir demais a acurácia para as demais classes.
 
@@ -87,7 +147,7 @@ Em outras palavras, tensores são uma forma de se estruturar dados de forma regu
 
 O desafio em questão é transformar dados de comprimento variado em dados padronizados com o mesmo comprimento, para que possam ser organizados como um tensor tridimensional. Dessarte, é necessário de se empregar um algoritmo capaz de preencher lacunas e eliminar excessos para garantir que todos os dados tenham as mesmas proporções.
 
-"\textit{Padding}" não se trata de um algoritmo específico, mas de qualquer algoritmo capaz de preencher lacunas para garantir regularidade entre dados. Tratando-se de séries temporais, os algoritmos de \textit{Padding} mais comuns envolvem preencher com zeros, com médias ou repetindo valores. Neste trabalho, optou-se por preencher as lacunas repetindo-se a última detecção do evento e eliminando as primeiras em casos de eventos muito grandes. 
+"\textit{Padding}" não se trata de um algoritmo específico, mas de qualquer algoritmo capaz de preencher lacunas para garantir regularidade entre dados. Tratando-se de séries temporais, os algoritmos de \textit{Padding} mais comuns envolvem preencher com zeros, com médias ou repetindo valores. Neste trabalho, optou-se por preencher as lacunas repetindo-se a última detecção do evento. 
 
 \begin{figure}[ht]
     \centering
@@ -99,44 +159,76 @@ O desafio em questão é transformar dados de comprimento variado em dados padro
 
 O motivo para esta escolha é dado pela observação do comportamento da saída da rede ao longo de cada passagem pelos dados. Observou-se que a rede tende ajustar sua saída rapidamente, dentro de 5 iterações, e a manter esta saída até o final, revelando que converge em um valor rapidamente. Logo, foram evitados algoritmos que causem ruído no início da série temporal, período de maior convergência do algoritmo.
 
+\subsection{Metodologia}
 
-\subsection{Servidores do Censipam}
+Por fim, o funcionamento do código de treinamento pode ser então ilustrado por meio do seguinte fluxograma:
+%\todo[inline]{Metodologia toda falando sobre o random forest e nada de lstm, por mim tira esse pedaço e fala sobre LSTM}
+%Por meio da biblioteca scikit-learn, é possível escrever um código simples que emprega o uso do modelo Random %Forest e com fácil customização. 
 
-A parceria com o CENSIPAM se deu com o intuito de integrar o modelo de aprendizado como uma ferramenta classificadora em seu sistema. Para isto, foi-se fornecido acesso a uma máquina por meio de tunelamento SSH para que o projeto tenha acesso ao banco de  dados em tempo real.
-
-Dessa forma, o código foi implementado no sistema para que rode continuamente. Atualmente, o programa aguarda até as 23 horas de cada dia para iniciar seu processamento. Neste momento, são requisitados os dados novos, referentes ao dia atual, e os dados antigos de mesmo ID, com apenas XXX features. A partir delas, o algoritmo de adição de features adiciona as demais. Em sequência, os dados passam pela etapa de pré-processamento, sendo normalizados e efetuado o padding. Por fim, o algoritmo de aprendizado de máquina classifica estes dados e monta arquivos dos tipos CSV e SHP com todos os dados classificados.
-
-\subsection{Dados de Treinamento e Dados em Produção}
-\todo[inline]{mostrar gráficos comparando ambos datasets}
-Os fornecidos para o treinamento do algoritmo e os dados obtidos em produção nos servidores são diferentes. Primeiramente, os dados de treinamento vão até o ano 2022 enquanto os dados disponíveis nos servidores se iniciam em 2023. Além disso, é interessante de se estudar a continuidade entre estes dados, de forma a garantir que sua qualidade é similar à dos dados utilizados no treinamento, ou se houve alguma mudança na forma como são produzidos, como por exemplo, mudança de métrica de metros para quilômetros.
-
-
-\subsection{Treinamento x Produção}
-\subsection{}
-
-\section{Métricas de Avaliação do Modelo}
-
-A avaliação de modelos de aprendizado de máquina é crucial para desenvolver um bom algoritmo de aprendizado de máquina. Métricas de avaliação fornecem uma medida objetiva do desempenho do modelo, permitindo comparações entre diferentes abordagens.
-
-No algoritmo de treinamento do modelo, separou-se o dataset entre validação e treinamento, sendo 80\% destinado para o treinamento e 20\% para a validação, separados cronologicamente. As métricas são obtidas de época em época e podem ser observadas por meio do módulo Tensorboard, disponível pelo Tensorflow \cite{tensorflow2015-whitepaper}, ou pelo terminal do programa como uma tabela ao finalizar-se o treinamento.
-
-Métricas são essenciais no ajuste fino dos hiper parâmetros do modelo de aprendizado de máquina. A partir deles, é possível diagnosticar problemas como \textit{overfitting} ou explosão de gradiente. Os dados gerados são acurácia, precisão, \textit{recall} e \textit{f-score} para cada classe e no total de forma ponderada. Além disso também são registrados os valores dos pesos dos nós da rede neural de forma a se observar explosões ou desaparecimentos de gradiente.
-
-\begin{figure}[ht]
-    \[F_{1} = \frac{2tp}{2tp + fp + fn}\]
-    \caption{Fórmula para \textit{F-score}}
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.98\linewidth}
+		\centering
+		\includegraphics[scale=0.6]{tg1/figuras/flstm_flowchart.png}
+		\caption{Fluxograma do funcionamento do código do LSTM} \label{fig:lstm_flowchart}
+	\end{minipage}
 \end{figure}
 
-\begin{figure}[ht]
-    \[ \textit{recall} =  \frac{tp}{tp + fn}\]
-    \caption{Fórmula para \textit{recall}}
-\end{figure}
+\subsection{Desempenho}
 
-Onde "tp" é quantidade de verdadeiros positivos, "fp" falsos positivos e "fn" falsos negativos. \textit{F-score} é uma métrica útil para medir o aprendizado da rede pois é uma forma de levar em consideração o desequilíbrio entre classes. Por exemplo, em uma tarefa de classificação cujo a classe 1 representa apenas 1\% dos dados teria uma acurácia de 99\% caso exibisse apenas a classe 0 como resultado, porém o \textit{F-score} traria um resultado péssimo, informando a falha da rede. Já o \textit{recall}, que é utilizado no cálculo do \textit{F-score}, mede a capacidade de um modelo identificar corretamente todos os exemplos positivos em um conjunto de dados. 
+No algoritmo de treinamento do modelo, separou-se o dataset entre validação e treinamento, sendo 80\% destinado para o treinamento e 20\% para a validação, separados cronologicamente. As métricas são obtidas de época em época e podem ser observadas por meio do módulo Tensorboard, disponível pelo Tensorflow \cite{tensorflow2015-whitepaper}, ou pelo terminal do programa como uma tabela ao finalizar-se o treinamento, conforme visto na tabela \ref{tab:resultados}.
+
 
 \todo[inline]{inserir tabela com performance e prints do tensorboard}
 
     
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        & Acurácia & Precisão & Recall & F1-Score \\
+        \hline
+        classe 1 & 0.839 & 0.869 & 0.839 & 0.854 \\
+        classe 2 & 0.821 & 0.763 & 0.821 & 0.791 \\
+        classe 3 & 0 & 0 & 0 & 0 \\
+        classe 4 & 0.536 & 0.523 & 0.534 & 0.529 \\
+        \hline
+        Ponderada & 0.779 & 0.768 & 0.779 & 0.773 \\
+        \hline
+    \end{tabular}
+
+
+    \vspace{10pt}
+    
+    \begin{tabular}{|c|c|}
+        \hline
+        Classe & Quantidade de eventos \\
+        \hline
+        classe 1 & 73647 \\
+        classe 2 & 64205 \\
+        classe 3 & 3136 \\
+        classe 4 & 19986 \\
+        \hline
+    \end{tabular}
+    \caption{Resultados da Avaliação}
+    \label{tab:resultados}
+\end{table}
+
+\subsection{Balanceamento}
+
+Como podemos ver na tabela \ref{tab:resultados}, a rede em seu treinamento praticamente desconsiderou a presença da classe 3 dentro do \textit{dataset}, observando a imagem \ref{fig:lstm_sem_balanc} podemos entender o porque disso. A quantidade de eventos de sub-bosque é bastante inferior a das outras classes, em situações como essa, a rede aprende a não prever aquela classe, isso porque ela é tão inexpressiva que mesmo que ele a desconsidere, a acurácia da rede permanece alta. Como queremos que o trabalho seja capaz de fornecer todas os 4 tipos de fogo, é necessário fazer um balanceamento do \textit{dataset} para aumentar a expressividade das classes menos presentes.
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.98\linewidth}
+		\centering
+		\includegraphics[scale=0.6]{tg1/figuras/sem_balanceamento_pie.png}
+		\caption{Gráfico da presença de cada classe dentro do \textit{Dataset}} \label{fig:lstm_sem_balanc}
+	\end{minipage}
+\end{figure}
+
+O balanceamento pode ser feito utilizando de duas estratégias: remoção de dados e o chamado \textit{data augmentation}, onde aumentamos a quantidade de um certo tipo de dado. Aqui, ambas foram utilizadas, como pode ser observado na tabela \ref{tab:resultados2}, diminuimos a quantidade de eventos para todas as classes exceto a 3, enquanto aumentamos a quantidade de eventos dela. Tal aumento foi feito repetindo os eventos dentro do banco de dados. A tabela também possui o desempenho do modelo para o treinamento com o banco de dados balanceado.
+
 \begin{table}[h]
     \centering
     \begin{tabular}{|c|c|c|c|c|}
@@ -157,17 +249,43 @@ Onde "tp" é quantidade de verdadeiros positivos, "fp" falsos positivos e "fn" f
     
     \begin{tabular}{|c|c|}
         \hline
-        Classe & Quantidade \\
+        Classe & Quantidade de eventos \\
         \hline
-        classe 1 & 73647 \\
-        classe 2 & 64205 \\
-        classe 3 & 3136 \\
-        classe 4 & 19986 \\
+        classe 1 & 25088 \\
+        classe 2 & 23866 \\
+        classe 3 & 9408 \\
+        classe 4 & 10662 \\
         \hline
     \end{tabular}
     \caption{Resultados da Avaliação}
-    \label{tab:resultados}
+    \label{tab:resultados2}
 \end{table}
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.98\linewidth}
+		\centering
+		\includegraphics[scale=0.6]{tg1/figuras/balanceado_pie.png}
+		\caption{Gráfico balanceado da presença de cada classe dentro do \textit{Dataset}} \label{fig:lstm_com_balanc}
+	\end{minipage}
+\end{figure}
+
+
+\section{Servidores do Censipam}
+
+A parceria com o CENSIPAM se deu com o intuito de integrar o modelo de aprendizado como uma ferramenta classificadora em seu sistema. Para isto, foi-se fornecido acesso a uma máquina por meio de tunelamento SSH para que o projeto tenha acesso ao banco de  dados em tempo real.
+
+Dessa forma, o código foi implementado no sistema para que rode continuamente. Atualmente, o programa aguarda até as 23 horas de cada dia para iniciar seu processamento. Neste momento, são requisitados os dados novos, referentes ao dia atual, e os dados antigos de mesmo ID, com apenas XXX features. A partir delas, o algoritmo de adição de features adiciona as demais. Em sequência, os dados passam pela etapa de pré-processamento, sendo normalizados e efetuado o padding. Por fim, o algoritmo de aprendizado de máquina classifica estes dados e monta arquivos dos tipos CSV e SHP com todos os dados classificados.
+
+\subsection{Dados de Treinamento e Dados em Produção}
+\todo[inline]{mostrar gráficos comparando ambos datasets}
+Os fornecidos para o treinamento do algoritmo e os dados obtidos em produção nos servidores são diferentes. Primeiramente, os dados de treinamento vão até o ano 2022 enquanto os dados disponíveis nos servidores se iniciam em 2023. Além disso, é interessante de se estudar a continuidade entre estes dados, de forma a garantir que sua qualidade é similar à dos dados utilizados no treinamento, ou se houve alguma mudança na forma como são produzidos, como por exemplo, mudança de métrica de metros para quilômetros.
+
+
+\subsection{Treinamento x Produção}
+\subsection{}
+
+
 
 % \section{Evolução do modelo MLP}
 

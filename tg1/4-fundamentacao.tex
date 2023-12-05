@@ -82,6 +82,10 @@ Os dados normalmente são separados em conjuntos de dados de Treinamento e dados
 Um conjunto de dados de série temporal (ou "dataset" de série temporal) é uma coleção de informações organizadas de maneira sequencial, onde cada ponto de dados está associado a um período de tempo específico. Esse tipo de conjunto de dados é usado para registrar observações, medições ou valores ao longo do tempo. 
 Os datasets de séries temporais são frequentemente usados em análises estatísticas, modelagem preditiva e aprendizado de máquina para entender tendências, padrões sazonais e comportamentos ao longo do tempo.
 
+\subsubsection{\textbf{Normalização do \textit{Dataset}}}
+
+Normalizar os dados é uma etapa crucial de pré-processamento que consiste em ajustar as características para uma faixa comum, evitando que valores numericamente mais elevados de algumas características dominem sobre os valores numericamente menores. O principal propósito é reduzir o viés daquelas características cuja contribuição numérica é mais significativa na distinção entre as classes \cite{SINGH2020105524}.
+
 \subsection{\textbf{\textit{Overfitting}}}
 
 \textit{Overfitting}, ou sobreajuste em português, ocorre quando um modelo de machine learning se ajusta excessivamente aos dados de treinamento de maneira que ele passe a falsa impressão de que possui um alto rendimento, porém ao receber dados novos de entrada, a precisão da saída cai consideravelmente \cite{overftt}.
@@ -100,9 +104,40 @@ Na imagem \ref{fig:overftt} temos um exemplo de sobreajuste para um modelo de re
 
 O \textit{overfitting} ocorre quando um modelo é treinado excessivamente nos dados de treinamento, capturando padrões específicos desses dados que não são generalizáveis para novos dados. O modelo acaba por incorporar o ruído dos dados de entrada, levando a previsões imprecisas quando o modelo é exposto a novos dados com ruído diferente.
 
+\subsection{\textbf{Métricas de Avaliação do Modelo}}
+
+A avaliação de modelos de aprendizado de máquina é crucial para desenvolver um bom algoritmo de aprendizado de máquina. Métricas de avaliação fornecem uma medida objetiva do desempenho do modelo, permitindo comparações entre diferentes abordagens.
+
+Métricas são essenciais no ajuste fino dos hiper parâmetros do modelo de aprendizado de máquina. A partir deles, é possível diagnosticar problemas como \textit{overfitting} ou explosão de gradiente. Os dados gerados são acurácia, precisão, \textit{recall} e \textit{f-score} para cada classe e no total de forma ponderada. Além disso também são registrados os valores dos pesos dos nós da rede neural de forma a se observar explosões ou desaparecimentos de gradiente.
+
+\begin{figure}[ht]
+    \text{Acurácia} = $\frac{\text{Número de previsões corretas}}{\text{Número total de previsões}}$
+    \centering
+    \caption{Fórmula para \textbf{acurácia}}
+\end{figure}
+
+\begin{figure}[ht]
+    \[\text{Precisão} = \frac{tp}{tp+fp}\]
+    \centering
+    \caption{Fórmula para \textbf{precisão}}
+\end{figure}
 
 
-\subsection{\textbf{\textit{Random Forest - TIRA NÉ}}}
+\begin{figure}[ht]
+    \[F_{1} = \frac{2tp}{2tp + fp + fn}\]
+    \caption{Fórmula para \textit{F-score}}
+\end{figure}
+
+\begin{figure}[ht]
+    \[ \textit{recall} =  \frac{tp}{tp + fn}\]
+    \caption{Fórmula para \textit{recall}}
+\end{figure}
+
+Onde "tp" é quantidade de verdadeiros positivos, "fp" falsos positivos e "fn" falsos negativos. \textit{F-score} é uma métrica útil para medir o aprendizado da rede pois é uma forma de levar em consideração o desequilíbrio entre classes. Por exemplo, em uma tarefa de classificação cujo a classe 1 representa apenas 1\% dos dados teria uma acurácia de 99\% caso exibisse apenas a classe 0 como resultado, porém o \textit{F-score} traria um resultado péssimo, informando a falha da rede. Já o \textit{recall}, que é utilizado no cálculo do \textit{F-score}, mede a capacidade de um modelo identificar corretamente todos os exemplos positivos em um conjunto de dados.
+
+\section{Modelos de aprendizado de máquina}
+
+\subsection{\textbf{\textit{Random Forest}}}
 
 Um modelo \textit{ensemble}, isto é, um algoritmo que emprega várias cópias do mesmo modelo operando em paralelo. O \textit{Random Forest} produz várias árvores de decisão independentes que processam os dados fornecidos e produzem um resultado final, isto é, cada árvore faz sua classificação ou regressão. A partir disso, o resultado final é decidido por meio de uma "eleição" entre
 a saída de todas as árvores. Este modelo é bastante empregado para algumas situações por demonstrar bons resultados a partir de dados categóricos, além de ser bem fácil de ser visualizado e interpretado por ser semelhante a uma árvore de cabeça para baixo \cite{oreillyML}.
@@ -119,7 +154,7 @@ Cada árvore de decisão é construída dividindo os dados em nós de decisão c
 	\end{minipage}
 \end{figure}
 
-\subsection{\textbf{MLP (\textit{MutiLayer Perceptron - TIRA NÉ)}}}
+\subsection{\textbf{MLP (\textit{MutiLayer Perceptron)}}}
 
 Caracterizado por camadas com vários nós, semelhantes a neurônios,
 com conexões entre si, semelhantes às sinapses. É o modelo mais comum das tais Redes Neurais, apresentando uma camada de entrada (Input Layer) e saída (Output Layer) e um número qualquer de camadas invisíveis (Hidden Layer) entre ambas \cite{hastie_09_elements-of.statistical-learning}.
