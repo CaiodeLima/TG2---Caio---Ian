@@ -71,14 +71,14 @@ Média ponderada & 0.99      & 0.99   & 0.99     & 159258
 
 Os resultados obtidos por meio da aplicação de dois modelos distintos de aprendizado de máquina, Random Forest e Multi-Layer Perceptron (MLP), na tarefa de classificação de queimadas na Amazônia, revelaram-se altamente promissores. Ambos os modelos demonstraram uma capacidade robusta de aprender padrões complexos nos dados, contribuindo para uma precisão notável na identificação de áreas afetadas por queimadas. Esses resultados preliminares destacam o potencial dessas técnicas de aprendizado de máquina na monitorização e prevenção de eventos de queimadas na Amazônia, representando um avanço significativo na aplicação de soluções inovadoras para desafios ambientais complexos.
 
-Confirmada a eficácia da utilização de \textit{machine learning} para o banco de dados do GFED, podemos então trazer nossa metodologia para o banco de dados do CENSIPAM, sobre o qual o nosso trabalho deverá operar para ser integralizado ao Painel do Fogo, trazendo também as \textit{features} de maior importância, as quais foram obtidas conforme está descrito na seção \ref{sec:features}.
+Confirmada a eficácia da utilização de \textit{machine learning} para o banco de dados do GFED, podemos então trazer nossa metodologia para o banco de dados do Censipam, sobre o qual o nosso trabalho deverá operar para ser integralizado ao Painel do Fogo, trazendo também as \textit{features} de maior importância, as quais foram obtidas conforme está descrito na seção \ref{sec:features}.
 
 Em Bruno Scholles \cite{BrunoScholess2023} pode-se observar o desempenho do algoritmo de \textit{Random Forest} para a base de dados do Painel do Fogo. O trabalho aqui apresentado procura usufruir da vantagem fornecida de datação separada para cada detecção do evento dentro dessa base assim como ilustrado na figura \ref{fig:progressao}. Graças a isso, é possível testarmos a eficiência de um modelo do tipo LSTM para realizar a classificação de queimadas, analisando-as como uma série temporal.
 
 
 
 \section{LSTM}
-\todo[inline]{print do código no tema claro, com huperparâmetros}
+%\todo[inline]{print do código no tema claro, com huperparâmetros}
 
 \subsection{Modelo}
 
@@ -130,14 +130,14 @@ O problema de overfitting foi encontrado durante alguns testes como consequênci
 
 Na figura \ref{fig:overfitting} pode-se ver que embora a acurácia de treinamento esteja aumentando, a acurácia de validação não está melhorando. Dessa forma, pode-se dizer que a rede está se tornando "viciada" nos dados de treinamento, aprendendo a interpretá-los bem mas não se tornando capaz de prever dados diferentes deste.
 
-Tendo em mãos estes resultados, optou-se por utilizar um leve balanceamento, aumentando a representatividade de 1.8\% para 5\%. Esta proporção foi obtida de forma empirica como um valor que representa uma melhora significativa na acurácia para a classe 3 porém sem reduzir demais a acurácia para as demais classes.
+Tendo em mãos estes resultados, optou-se por utilizar um leve balanceamento, aumentando a representatividade de 1.8\% para 5\%. Esta proporção foi obtida de forma empírica como um valor que representa uma melhora significativa na acurácia para a classe 3 porém sem reduzir demais a acurácia para as demais classes.
 
 
 \subsection{Organização em Série Temporal}
 
 Transformar os dados existentes em uma série temporal envolve a adição de uma nova dimensão, a temporal. Em termos práticos, isto é efetuado por meio de uma dimensão acrescentada aos tensores dos dados transformando eventos discretos em dados sequenciais. 
 
-Os dados disponibilizados pelo CENSIPAM possuem identificadores rotulados como "id\_evento". Estes códigos agrupam diferentes detecções de incêndios como pertencentes a um mesmo foco de incêndio e é necessário para a transformação dos dados em uma série temporal. Em outras palavras, cada dados possui três dimensões: o ID representando o foco de incêndio, a quantidade de detecções relativas a este mesmo incêndio, e todos os dados de cada uma destas detecções.
+Os dados disponibilizados pelo Censipam possuem identificadores rotulados como "id\_evento". Estes códigos agrupam diferentes detecções de incêndios como pertencentes a um mesmo foco de incêndio e é necessário para a transformação dos dados em uma série temporal. Em outras palavras, cada dados possui três dimensões: o ID representando o foco de incêndio, a quantidade de detecções relativas a este mesmo incêndio, e todos os dados de cada uma destas detecções.
 
 No entanto, esta abordagem envolve o desafio de transformar estes dados em tensores. Todo o código utilizado é construído a partir do Pytorch \cite{NEURIPS2019_9015}, que utiliza tensores como tipo de dado. Tensores são matrizes multi-dimensionais, apenas uma forma de se organizar dados de forma lógica. Por exemplo, pode-se imaginar um tensor tridimensional como um cubo, tratando-se de um tensor cujo as três dimensões são iguais.
 
@@ -220,7 +220,7 @@ Como podemos ver na tabela \ref{tab:resultados}, a rede em seu treinamento prati
 
 \begin{figure}[H]
 	\centering
-	\begin{minipage}{0.98\linewidth}
+	\begin{minipage}{0.9\linewidth}
 		\centering
 		\includegraphics[scale=0.6]{tg1/figuras/sem_balanceamento_pie.png}
 		\caption{Gráfico da presença de cada classe dentro do \textit{Dataset}} \label{fig:lstm_sem_balanc}
@@ -263,7 +263,7 @@ O balanceamento pode ser feito utilizando de duas estratégias: remoção de dad
 
 \begin{figure}[H]
 	\centering
-	\begin{minipage}{0.98\linewidth}
+	\begin{minipage}{0.9\linewidth}
 		\centering
 		\includegraphics[scale=0.6]{tg1/figuras/balanceado_pie.png}
 		\caption{Gráfico balanceado da presença de cada classe dentro do \textit{Dataset}} \label{fig:lstm_com_balanc}
@@ -273,7 +273,7 @@ O balanceamento pode ser feito utilizando de duas estratégias: remoção de dad
 
 \section{Servidores do Censipam}
 
-A parceria com o CENSIPAM se deu com o intuito de integrar o modelo de aprendizado como uma ferramenta classificadora em seu sistema. Para isto, foi-se fornecido acesso a uma máquina por meio de tunelamento SSH para que o projeto tenha acesso ao banco de  dados em tempo real.
+A parceria com o Censipam se deu com o intuito de integrar o modelo de aprendizado como uma ferramenta classificadora em seu sistema. Para isto, foi-se fornecido acesso a uma máquina por meio de tunelamento SSH para que o projeto tenha acesso ao banco de  dados em tempo real.
 
 Dessa forma, o código foi implementado no sistema para que rode continuamente. Atualmente, o programa aguarda até as 23 horas de cada dia para iniciar seu processamento. Neste momento, são requisitados os dados novos, referentes ao dia atual, e os dados antigos de mesmo ID, com apenas XXX features. A partir delas, o algoritmo de adição de features adiciona as demais. Em sequência, os dados passam pela etapa de pré-processamento, sendo normalizados e efetuado o padding. Por fim, o algoritmo de aprendizado de máquina classifica estes dados e monta arquivos dos tipos CSV e SHP com todos os dados classificados.
 
@@ -282,8 +282,52 @@ Dessa forma, o código foi implementado no sistema para que rode continuamente. 
 Os fornecidos para o treinamento do algoritmo e os dados obtidos em produção nos servidores são diferentes. Primeiramente, os dados de treinamento vão até o ano 2022 enquanto os dados disponíveis nos servidores se iniciam em 2023. Além disso, é interessante de se estudar a continuidade entre estes dados, de forma a garantir que sua qualidade é similar à dos dados utilizados no treinamento, ou se houve alguma mudança na forma como são produzidos, como por exemplo, mudança de métrica de metros para quilômetros.
 
 
-\subsection{Treinamento x Produção}
-\subsection{}
+\subsection{Comparando dados do Treinamento com os dados em Produção}
+
+O treinamento do modelo de aprendizado de máquina envolve o uso de um dataset de treino suficientemente parecido com dados de casos práticos, ou aumentam-se as chances de que a performance do modelo em operação não seja satisfatória. Dessa forma, foram-se gerados vários gráficos de caixa comparando as distribuições dos dados utilizados no treinamento com os dados obtidos diretamente dos servidores do Censipam, onde o modelo está em operação diária.
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.98\linewidth}
+		\centering
+		\includegraphics[scale=0.5]{tg1/figuras/graficosbons.png}
+		\caption{Diagramas de Caixa de dados semelhantes}
+            \label{fig:dadosbons}
+	\end{minipage}
+\end{figure}
+
+A imagem \ref{fig:dadosbons} contém gráficos de caixa além de média e desvio padrão de algumas \textit{features} cujo as distribuições mostraram-se bastante similares entre os dois datasets. Estes dados possuem distribuições semelhantes, com valores de média e desvio padrão próximos indicando que ambos os dataset se assemelham em relação a estes dados.
+
+No entanto, a diferença entre dados é significativa para vários outros dados. Na imagem \ref{fig:area} encontra-se o gráfico de caixa da \textit{feature} relativa a variação da área do incêndio. A diferença de escala entre as duas medidas é óbvia e indica que há algo de errado nestes dados. Este problema se revela em todos os dados relativos a área.
+
+A escala sugere que talvez os dados estejam em unidades de medida diferentes, uma é metros quadrados e a outra em quilômetros quadrados. A imagem \ref{fig:corrigido} contém o mesmo gráfico, porém com os dados do servidor ajustados de quilômetro quadrado para metro quadrado. Como a semelhança entre os dados é alta, a hipótese de que trata-se de uma diferença de escala utilizada na geração dos dados é provavelmente verdadeira.
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.98\linewidth}
+		\centering
+		\includegraphics[scale=0.6]{tg1/figuras/area2.png}
+		\caption{Diagramas de Caixa de variação de área da queimada}
+            \label{fig:area}
+	\end{minipage}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.98\linewidth}
+		\centering
+		\includegraphics[scale=0.6]{tg1/figuras/corrigido.png}
+		\caption{Diagramas de Caixa de variação de área da queimada corrigido em 10e6}
+            \label{fig:corrigido}
+	\end{minipage}
+\end{figure}
+
+Além disto, a \textit{features} geradas costumam apresentar problemas em geral, com todos os dados sendo aproximadamente zero, indicando algum problema com o algoritmo que as gera. Como este erro não surgiu durante o processo de gerar dados para o treinamento, nem ao se gerarem os dados em produção para o trabalho de \cite{BrunoScholess2023}. A hipótese mais provável é de que há alguma diferença nestes dados disponíveis no servidor do Censipam para o projeto atual que não foi levada em consideração durante o desenvolvimento do algoritmo. A inconsistência específica não foi encontrada.
+
+Dessa forma, espera-se que o modelo não performe bem em produção, visto que não está recebendo dados adequados. Até o momento não tem como se verificar sua verdadeira performace visto que os dados novos do servidor não foram rotulados manualmente pelo pessoal do Censipam.
+
+
 
 
 

@@ -3,7 +3,7 @@
 \label{cap_intr}
 % ----------------------------------------------------------
 \section{Queimadas e Amazônia}
-O Brasil é o país com a maior presença da floresta Amazônica na América, 60\% do total da floresta está dentro do território brasileiro, o que equivale a aproximadamente 5 milhoes de quilômetros quadrados ou 59\% do território nacional \cite{tamanhoIBGE}. Por consequência disto, possuimos uma enorme responsabilidade com ela, existente em diversas formas, como na defesa do território nacional ou na proteção de um enorme patrimônio da humanidade. 
+O Brasil é o país com a maior presença da floresta Amazônica na América, 60\% do total da floresta está dentro do território brasileiro, o que equivale a aproximadamente 5 milhões de quilômetros quadrados ou 59\% do território nacional \cite{tamanhoIBGE}. Por consequência disto, possuímos uma enorme responsabilidade com ela, existente em diversas formas, como na defesa do território nacional ou na proteção de um enorme patrimônio da humanidade. 
 
 Tal patrimônio vem requerendo cada vez mais atenção nos últimos tempos, de acordo com dados gerados pelo PRODES \cite{novatecnica}, entre agosto de 2021 e julho de 2022 a taxa de desmatamento da Amazônia Legal foi cerca de 11594$km^{2}$. Como podemos ver na figura \ref{fig:prodesgraph}, tal taxa vem acompanhando uma alta nos últimos 10 anos do desmatamento no bioma. O INPE \cite{INPE} estima que, desde 1988, 17\% do bioma já tenha sido desmatado. Tais dados reforçam a necessidade de métodos de monitoramento e controle que reduzam as perdas do meio ambiente.
 
@@ -19,11 +19,11 @@ Tal patrimônio vem requerendo cada vez mais atenção nos últimos tempos, de a
 
 Uma importante área de atuação na preservação da floresta se trata do combate à incêndios. Todos os anos, milhares de quilômetros da floresta amazônicas são queimados por incêndios florestais, causando impactos ecológicos e econômicos, redução da biomassa florestal, mudanças na composição de espécies de árvores e esgotamento do solo \cite{penha}. 
 
-Os incêndios podem ocorrer naturalmente ou podem estar atrelados à atividades humanas. No entanto, queimadas resultantes da ação humana constituem quase que a totalidade dos incêndios registrados nos territórios no Brasil, ocupando o 5º lugar entre os países mais poluidores \cite{bdqueimadas}.
+Os incêndios podem ocorrer naturalmente ou podem estar atrelados a atividades humanas. No entanto, queimadas resultantes da ação humana constituem quase que a totalidade dos incêndios registrados nos territórios no Brasil, ocupando o 5º lugar entre os países mais poluidores \cite{bdqueimadas}.
 
 Já as queimadas naturais, por sua vez, costumam ter sua ignição dada por raios, tornando-as mais comuns em períodos de secas prolongadas quando as queimadas costumam atingir seu pico. São mais frequentes no bioma Cerrado que é naturalmente mais seco e adaptado a queimadas naturais recorrentes, normalmente no início e fim das estações chuvosas. Em contraste, o bioma Amazônia é extremamente úmido e apresenta baixos índices de queimadas naturais.
 
-Conforme pesquisas recentes \cite{amazonia_carbono}, a queima e o desflorestamento excessivo na floresta Amazônica está afetando a capacidade de absorção de CO2 da atmosfera, ao mesmo tempo que estas atividades emitem grandes quantidades de carbono por meio da queima de madeira. Além disso, estas ações apresentam um impacto climático na região, tornando a estação seca mais seca, quente e longa, agredindo ainda mais o bioma.
+Conforme pesquisas recentes \cite{amazonia_carbono}, a queima e o desflorestamento excessivo na floresta Amazônica estão afetando a capacidade de absorção de CO2 da atmosfera, ao mesmo tempo que estas atividades emitem grandes quantidades de carbono por meio da queima de madeira. Além disso, estas ações apresentam um impacto climático na região, tornando a estação seca mais seca, quente e longa, agredindo ainda mais o bioma.
 
 \section{Objetivos}
 
@@ -31,9 +31,9 @@ Os incêndios florestais de origem antropológica são predominantemente e princ
 
 Dessa forma, este projeto visa criar uma ferramenta de \textbf{tipificação automática de incêndios} no território amazônico para auxiliar no combate ao fogo na região. De acordo com o \textit{EU Horizon 2020 Work Programme} \cite{horizon}, o ciclo de gestão do fogo pode ser amplamente segmentado em três etapas: (1) prevenção e preparação (pré-fogo); (2) detecção e resposta (gestão de incêndios florestais ativos); (3) atividades de restauração e adaptação (pós-incêndio). Este trabalho estará focado em desenvolver uma ferramenta que sirva de auxílio para a segunda etapa, na resposta dos órgãos de defesa para com incêndios ativos.
 
-Este trabalho visou o desenvolvimento de um \textbf{algoritmo} projetado para ser incluído ao Painel do Fogo, uma plataforma Web que disponibiliza informações sobre incêndios e queimadas no Brasil, desenvolvido pelo Centro Gestor e Operacional do Sistema de Proteção da Amazônia \cite{painel-fogo}. No entanto, diferente de outras plataformas de monitoramento, o Painel do Fogo trabalha ao lado de batalhões e brigadas no combate ao fogo. Através desta plataforma se é possível obter o 'perímetro' e o “status” mais recente sobre uma queimada ou incêndio de modo que um evento esteja associado a uma ocorrência ou acionamentos de equipes.
+Este trabalho visou o desenvolvimento de um \textbf{algoritmo} projetado para ser incluído ao Painel do Fogo, uma plataforma Web que disponibiliza informações sobre incêndios e queimadas no Brasil, desenvolvido pelo Centro Gestor e Operacional do Sistema de Proteção da Amazônia \cite{painel-fogo}. No entanto, diferente de outras plataformas de monitoramento, o Painel do Fogo trabalha ao lado de batalhões e brigadas no combate ao fogo. Através desta plataforma se é possível obter o "perímetro" e o “status” mais recente sobre uma queimada ou incêndio de modo que um evento esteja associado a uma ocorrência ou acionamentos de equipes.
 
-O modelo finalizado é capaz de \textbf{classificar queimadas} dentro das quatro classificações utilizadas pelo CENSIPAM para tipificar incêndios florestais na amazônia \cite{andela}: 
+O modelo finalizado é capaz de \textbf{classificar queimadas} dentro das quatro classificações utilizadas pelo Censipam para tipificar incêndios florestais na Amazônia \cite{andela}: 
 
 %O sistema foi treinado utilizando o extenso banco de dados de queimadas no território Amazônico oferecido pelo Amazon Dashboard do GFED \cite{gfed}. Estes dados são tratados e alimentados a um algoritmo de aprendizado de máquina para o treinamento. O modelo finalizado é capaz de classificar queimadas dentro das quatro classificações utilizadas pelo GFED para tipificar incêndios florestais \cite{andela}: 
 

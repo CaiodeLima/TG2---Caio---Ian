@@ -84,7 +84,7 @@
 \renewcommand{\ABNTEXsubsectionfont}{}
 
 % Cores das linhas de todas as tabelas:
-\arrayrulecolor{verdeunb}
+%\arrayrulecolor{verdeunb}
 
 % Define comando \source
 \RequirePackage[font={small}, margin=0cm, justification=centering]{caption}
@@ -335,6 +335,12 @@
 \newcommand{\kwordiii}[1]{\def\kwordiiinome{#1}}
 \newcommand{\pchaveiv}[1]{\def\pchaveivnome{#1}}
 \newcommand{\kwordiv}[1]{\def\kwordivnome{#1}}
+\newcommand{\pchavev}[1]{\def\pchavevnome{#1}}
+\newcommand{\kwordv}[1]{\def\kwordvnome{#1}}
+\newcommand{\pchavevi}[1]{\def\pchavevinome{#1}}
+\newcommand{\kwordvi}[1]{\def\kwordvinome{#1}}
+\newcommand{\pchavevii}[1]{\def\pchaveviinome{#1}}
+\newcommand{\kwordvii}[1]{\def\kwordviinome{#1}}
 
 % Código da ficha catalográfica
 \newcommand{\numerocutter}[1]{\def\imprimircutter{#1}}
@@ -372,7 +378,7 @@
 			\vfill
 			\centering
 			\includegraphics[width=\paperwidth,height=\paperheight,%
-				keepaspectratio]{capa_fundo.pdf}%
+				keepaspectratio]{tg1/figuras/capa_fundo.pdf}%
 			\vfill
 		}
 	}
@@ -452,7 +458,8 @@
 & \\
 & \hspace{0.5cm} \imprimirtipotrabalho\ (\imprimircurso)\ \texttt{-{}-} \instituicaoi, \imprimirano. \\
 & \\
-& \hspace{0.5cm} 1. \pchaveinome. 2. \pchaveiinome. 3. \pchaveiiinome. \ifthenelse{\equal{\pchaveivnome}{}}{}{4. \pchaveivnome.} \ifthenelse{\equal{\autoriinome}{}}{\ifthenelse{\equal{\coorientnome}{}}{I. \orientsobrenome, \orientnome, orient. II. Título}{I. \orientsobrenome, \orientnome, orient. II. \coorientsobrenome, \coorientnome, coorient. III. Título}}{\ifthenelse{\equal{\coorientnome}{}}{I. \autoriisobrenome, \autoriinome. II. \orientsobrenome, \orientnome, orient. III. Título}{I. \autoriisobrenome, \autoriinome. II. \orientsobrenome, \orientnome, orient. III. \coorientsobrenome, \coorientnome, coorient. IV. Título}} 
+& \hspace{0.5cm} 1. \pchaveinome. 2. \pchaveiinome. 3. \pchaveiiinome. 4. \pchavevnome. 5. \pchavevinome. 6. \pchaveviinome.
+\ifthenelse{\equal{\pchaveviinome}{}}{}{7. \pchaveviinome.} \ifthenelse{\equal{\autoriinome}{}}{\ifthenelse{\equal{\coorientnome}{}}{I. \orientsobrenome, \orientnome, orient. II. Título}{I. \orientsobrenome, \orientnome, orient. II. \coorientsobrenome, \coorientnome, coorient. III. Título}}{\ifthenelse{\equal{\coorientnome}{}}{I. \autoriisobrenome, \autoriinome. II. \orientsobrenome, \orientnome, orient. III. Título}{I. \autoriisobrenome, \autoriinome. II. \orientsobrenome, \orientnome, orient. III. \coorientsobrenome, \coorientnome, coorient. IV. Título}} 
 \end{tabular}
 \end{minipage}}
 \end{center}

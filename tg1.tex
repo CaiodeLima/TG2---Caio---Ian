@@ -126,9 +126,9 @@
 
 % Local e data
 \local{Brasília}
-\dia{29}
-\mes{julho}
-\ano{2022}
+\dia{19}
+\mes{dezembro}
+\ano{2023}
 
 % Palavras-chave (pelo menos três devem ser informadas)
 \pchavei{Monitoramento da Amazônia}
@@ -137,6 +137,15 @@
 \kwordii{Machine Learning}
 \pchaveiii{Queimadas}
 \kwordiii{Fire} % deixar vazio se não tiver
+\pchaveiv{LSTM}
+\kwordiv{LSTM}
+\pchavev{Sensoriamento remoto}
+\kwordv{Remote sensing}
+\pchavevi{Banco de dados}
+\kwordvi{Dataset}
+\pchavevii{Censipam}
+\kwordvii{Censipam}
+
 
 % Código Cutter para a ficha catalográfica:
 % A ficha catalográfica deve conter o código Cutter, que pode ser obtido com a ajuda de alguns sites da internet (por exemplo, https://www.tabelacutter.com/). O sobrenome do primeiro autor é associado a um número com dois ou três dígitos, que deve ser utilizado como argumento do comando \numerocutter presente no arquivo *.tex principal do relatório. No caso de nomes como Carlos de Souza, utilize 'Souza, Carlos de' (e não 'de Souza, Carlos') para gerar o código.
@@ -146,10 +155,10 @@
 % Membros da banca
 \membrodabancai{Prof. Dr. Edson Mintsu Hung, UnB/FT/ENE} % Membro 1 - Geralmente é o orientador
 \membrodabancaifuncao{Orientador} % Em português mesmo que o trabalho seja em inglês.
-\membrodabancaii{Prof. Dr. } % Membro 2
+\membrodabancaii{Prof. Dr. Mylène C.Q. Farias, UnB/FT/ENE} % Membro 2
 \membrodabancaiifuncao{Examinador interno}
-\membrodabancaiii{Prof. Dr. } % Membro 3
-\membrodabancaiiifuncao{Examinador interno}
+\membrodabancaiii{Dr. Henrique Bernini} % Membro 3
+\membrodabancaiiifuncao{Examinador externo}
 \membrodabancaiv{} % deixar vazio se não tiver o quarto membro
 \membrodabancaivfuncao{Examinador externo}
 \membrodabancav{} % deixar vazio se não tiver o quarto membro
@@ -162,6 +171,8 @@
 % ------------------------------------------------------------------------
 % ------------------------------------------------------------------------
 \begin{document}
+
+
 
 % Alterar para o idioma no qual o trabalho será escrito
 \selectlanguage{brazil}
@@ -251,8 +262,7 @@
    \vspace*{\fill}
    
    % Primeiro autor
-   \textit{Este trabalho é dedicado às crianças adultas que,\\
-   quando pequenas, sonharam em se tornar cientistas.} \\
+   \textit{Este trabalho é dedicado a toda nossa equipe do projeto Curupira, \\ minha família que sempre foi minha casa \\ e meus amigos que me acompanharam nessa jornada.} \\
    
    \ifthenelse{\equal{\autoriinome}{}}{}{
    \vspace{1cm}
@@ -260,7 +270,7 @@
    \vspace*{\fill}
    
    % Segundo autor
-    \textit{Dedicatória do segundo autor.} \\
+    \textit{Dedico deste trabalho à equipe do projeto Curupira e à minha família e amigos, cujo apoio e carinho foram indispensáveis e me motivaram a ir além.} \\
    
    \vspace{1cm}
    \autoriinome\ \autoriisobrenome
@@ -275,23 +285,9 @@
 \begin{agradecimentos}
 
 % Primeiro autor
-Agradecemos ao Dr. Lauro César Araujo e equipe que desenvolveram a classe \abnTeX, que pôde ser facilmente customizada para escrita de trabalhos acadêmicos na Universidade de Brasília que atendessem não só as normas da ABNT, como também regras e necessidades específicas de cursos de graduação e pós-graduação.
-
-Agradecemos também ao Prof. Dr. Leonardo Luiz e Castro pelo modelo em \LaTeX\ para livro para editora UnB, com diversas customizações que foram adaptadas para o UnB\TeX.
+Agradecemos ao Dr. Edson Mintsu Hung por sua supervisão e orientação em nosso trabalho, aos professores Dr. Diogo Caetano Garcia e Dr. Nilson Donizete por suas contribuições e ensinamentos, ao nosso colega de projeto Bruno Scholles Soares Dias e ao Coordenador Operacional do Centro Regional de Porto Velho do Censipam Dr. Henrique Bernini. 
 % ---
 
-\ifthenelse{\equal{\autoriinome}{}}{}{
-\vspace{1cm}
-\hfill \autorinome\ \autorisobrenome
-\vspace{1cm}
-
-% Segundo autor
-Agradecimentos do segundo autor.
-% ---
-
-\vspace{1cm}
-\hfill \autoriinome\ \autoriisobrenome
-}
 
 \end{agradecimentos}
 % ---
@@ -303,7 +299,7 @@ Agradecimentos do segundo autor.
     \vspace*{\fill}
 	\begin{flushright}
 		\textit{``If you find that you're spending almost all your time on theory,\\ start turning some attention to practical things; \\ it will improve your theories.\\ If you find that you're spending almost all your time on practice, \\ start turning some attention to theoretical things; \\ it will improve your practice.''\\
-		(Donald Knuth)}
+		(Donald Knuth)} 
 	\end{flushright}
 \end{epigrafe}
 % ---
@@ -318,12 +314,15 @@ Agradecimentos do segundo autor.
 \setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
 \begin{resumo}[Resumo]
 % ---
-O trabalho propõe o desenvolvimento de um algoritmo baseado em inteligência artificial para monitoramento de incêndios no território da Amazônia Legal, como ferramenta de auxílio para a tomada de ações de preservação e combate a ações ilegais em tempo real. O uso de aprendizado de máquina foi escolhido por ser um método comprovadamente eficaz em projetos de proteção ambiental, que permite rápido reconhecimento de novos eventos com base em informações históricas. O trabalho foca na classificação de incêndios, e para isso os modelos são treinados com uma base de dados pública que não fornece informações em tempo real, mas possui a classificação para diversas queimadas ocorridas nos últimos anos.
+O trabalho propõe o desenvolvimento de um algoritmo baseado em inteligência artificial para monitoramento de incêndios no território da Amazônia Legal, como ferramenta de auxílio para a tipificação diária do fogo. O uso de aprendizado de máquina foi escolhido por ser um método comprovadamente eficaz em projetos de proteção ambiental, que permite rápido reconhecimento de novos eventos com base em informações históricas. O trabalho foca na classificação de incêndios, e para isso os modelos são treinados com uma base de dados pública que não fornece informações em tempo real, mas possui a classificação para diversas queimadas ocorridas nos últimos anos
+
 % ---
 \vspace{\onelineskip}
 
 \noindent
-\textbf{Palavras-chave}: \pchaveinome. \pchaveiinome. \pchaveiiinome. \ifthenelse{\equal{\pchaveivnome}{}}{}{\pchaveivnome.}
+\textbf{Palavras-chave}: \pchaveinome. \pchaveiinome. \pchaveiiinome. \pchaveivnome. \pchavevnome. \pchavevinome.
+\ifthenelse{\equal{\pchaveviinome}{}}{}{\pchaveviinome.}
+
 \end{resumo}}
 
 % Resumo em inglês
@@ -333,12 +332,13 @@ O trabalho propõe o desenvolvimento de um algoritmo baseado em inteligência ar
 \begin{resumo}[Abstract]
 \begin{otherlanguage*}{english}
 % ---
-This work proposes the development of an algorithm based on artificial intelligence for monitoring forest fires in the territory of the Legal Amazon, as an aid tool for taking preservation actions and combating illegal actions in real time. The use of machine learning was chosen for being a proven effective method in environmental protection projects, which allows fast recognition of new events based on historical information. The work focuses on the classification of fires, and for this the models are trained with a public database that does not provide real-time information, but has the classification for several fires that occurred in recent years.
+This work proposes the development of an algorithm based on artificial intelligence for monitoring forest fires in the territory of the Legal Amazon, as an aid tool for daily classification of fire. The use of machine learning was chosen for being a proven effective method in environmental protection projects, which allows fast recognition of new events based on historical information. The work focuses on the classification of fires, and for this the models are trained with a public database that does not provide real-time information, but has the classification for several fires that occurred in recent years.
 % ---
 \vspace{\onelineskip}
  
 \noindent 
-\textbf{Keywords}: \kwordinome. \kwordiinome. \kwordiiinome. \ifthenelse{\equal{\kwordivnome}{}}{}{\kwordivnome.}
+\textbf{Keywords}: \kwordinome. \kwordiinome. \kwordiiinome. \kwordivnome. \kwordvnome. \kwordvinome.
+\ifthenelse{\equal{\kwordviinome}{}}{}{\kwordviinome.}
 \end{otherlanguage*}
 \end{resumo}}
 % ---
@@ -422,31 +422,31 @@ This work proposes the development of an algorithm based on artificial intellige
 % Apêndices
 % ---
 
-\begin{apendicesenv}
+%\begin{apendicesenv}
 
 % Imprime uma página indicando o início dos apêndices
-\partapendices
+%\partapendices
 
-\include{tg1/apendice-a}
+%\include{tg1/apendice-a}
 
 %\include{tg1/apendice-b}
 
-\end{apendicesenv}
+%\end{apendicesenv}
 % ---
 
 % ---
 % Anexos
 % ---
 
-\begin{anexosenv}
+%\begin{anexosenv}
 
 % Imprime uma página indicando o início dos anexos
-\partanexos
+%\partanexos
 
-\include{tg1/anexo-a}
+%\include{tg1/anexo-a}
 
-\include{tg1/anexo-b}
+%\include{tg1/anexo-b}
 
-\end{anexosenv}
+%\end{anexosenv}
 
 \end{document}

@@ -8,7 +8,7 @@ Como mencionado na subseção \ref{dataset}, a criação de um banco de dados ou
 
 Neste trabalho, o banco de dados está no formato tabular, isto é, as informações estão dispostas em uma tabela. Cada linha da tabela possui um conjunto de \textit{features} (os dados de entrada) e um \textit{label} (o rótulo ou saída desejada). Este tipo de conjunto de dados é chamado de \textit{dataframe}, uma estrutura de dados bidimensional com os dados alinhados de forma tabular em linhas e colunas.
 
-Dois bancos de dados foram construídos para a experimentação com diferentes códigos de \textit{machine learning}, o primeiro construído utilizando dados obtidos e rotulados pelo Amazon Dashboard do GFED, e o segundo com dados obtidos e rotulados pelo CENSIPAM. A partir do treinamento com o banco do GFED, foi possível estipular as \textit{features} mais importantes na hora de realizar a tipificação do fogo e que não poderiam ser deixadas de lado na hora de treinar o modelo para trabalhar com o banco do CENSIPAM.
+Dois bancos de dados foram construídos para a experimentação com diferentes códigos de \textit{machine learning}, o primeiro construído utilizando dados obtidos e rotulados pelo Amazon Dashboard do GFED, e o segundo com dados obtidos e rotulados pelo Censipam. A partir do treinamento com o banco do GFED, foi possível estipular as \textit{features} mais importantes na hora de realizar a tipificação do fogo e que não poderiam ser deixadas de lado na hora de treinar o modelo para trabalhar com o banco do Censipam.
 
 \section{GFED}
 
@@ -70,12 +70,12 @@ Ao abrimos o \textit{shapefile} no QGIS, primeiro nos deparamos com uma imagem d
 
 Para converter o conteúdo da tabela de atributos em um \textit{dataframe}, faz-se necessário o uso das bibliotecas \textit{geopandas} e \textit{pandas} do \textit{python}. \textit{Pandas} é uma ferramenta de análise e manipulação de dados, e \textit{geopandas} estende os tipos de dados usados pelos \textit{pandas} para permitir operações espaciais em tipos geométricos. O que fazemos então é primeiro abrir o arquivo do tipo \textit{shapefile} usando \textit{geopandas} para criar um \textit{GeoDataFrame} e então usar uma função da biblioteca \textit{pandas} para convertê-lo em um \textit{dataframe} normal com as \textit{features} que iremos utilizar como entrada para os algoritmos de aprendizado de máquina.
 
-\section{CENSIPAM}
+\section{Censipam}
 \label{sec:censipamBD}
 
-Assim como o \textit{Amazon Dashboard}, o banco de dados obtido pelo CENSIPAM está em formato \textit{shapefile}. Tal banco pode ser acessado através do recurso de adição de camadas Web Feature Service (WFS) no QGIS, utilizando uma URL específica que aponta para um serviço remoto contendo dados vetoriais geoespaciais. O WFS é um padrão da Open Geospatial Consortium (OGC) que define interfaces para servir e consumir dados geoespaciais vetoriais pela web.
+Assim como o \textit{Amazon Dashboard}, o banco de dados obtido pelo Censipam está em formato \textit{shapefile}. Tal banco pode ser acessado através do recurso de adição de camadas Web Feature Service (WFS) no QGIS, utilizando uma URL específica que aponta para um serviço remoto contendo dados vetoriais geoespaciais. O WFS é um padrão da Open Geospatial Consortium (OGC) que define interfaces para servir e consumir dados geoespaciais vetoriais pela web.
 
-Na figura \ref{fig:qgiscensipam} temos um exemplo do que podemos visualizar ao acessar o banco de dados do CENSIPAM pelo QGIS:
+Na figura \ref{fig:qgiscensipam} temos um exemplo do que podemos visualizar ao acessar o banco de dados do Censipam pelo QGIS:
 
 \begin{figure}[htb]
 	\centering
@@ -86,7 +86,7 @@ Na figura \ref{fig:qgiscensipam} temos um exemplo do que podemos visualizar ao a
 	\end{minipage}
 \end{figure}
 
-Uma adição interessante presente nos dados do CENSIPAM se comparados com os do GFED, é a capacidade de adquirirmos diversas detecções de um mesmo evento de fogo como demonstrado na figura \ref{fig:progressao}. Com o GFED tinhamos acesso apenas a classificação e \textit{features} mais recente do incêndio, referente a sua última detecção realizada, porém com o CENSIPAM podemos obter ambos para detecções passadas, o que abre a possibilidade de incluir as características dinâmicas e temporais da queimada na sua classificação.
+Uma adição interessante presente nos dados do Censipam se comparados com os do GFED, é a capacidade de adquirirmos diversas detecções de um mesmo evento de fogo como demonstrado na figura \ref{fig:progressao}. Com o GFED tinhamos acesso apenas a classificação e \textit{features} mais recente do incêndio, referente a sua última detecção realizada, porém com o Censipam podemos obter ambos para detecções passadas, o que abre a possibilidade de incluir as características dinâmicas e temporais da queimada na sua classificação.
 
 
 
@@ -192,14 +192,14 @@ Para podermos observar a relação que cada \textit{feature} possui com a saída
 
 Podemos observar através dos gráficos que os tipos de fogo de savana (0) e pequenas clareiras (1) são mais fáceis de se tipificar, dados como \textit{tree cover}, \textit{deforestat}, \textit{frp}, \textit{fire count} e \textit{biomass} em conjunto são capazes de delimitar fortemente esses dois tipos. O desmatamento (4) e sub-bosque (3) apresentam maior diluição um com o outro e com os outros tipos, o que explica a maior dificuldade dos algoritmos em prevê-los corretamente, como será visto no capítulo \ref{resultados}.
 
-Como podemos ver na seção \ref{sec:censipamBD}, o banco de dados do CENSIPAM não conta com boa parte das \textit{features} presentes no banco do GFED, e como podemos ver algumas delas se mostraram essenciais para acusação do tipo do fogo. Torna-se necessário então buscar outras fontes que forneçam tais informações.
+Como podemos ver na seção \ref{sec:censipamBD}, o banco de dados do Censipam não conta com boa parte das \textit{features} presentes no banco do GFED, e como podemos ver algumas delas se mostraram essenciais para acusação do tipo do fogo. Torna-se necessário então buscar outras fontes que forneçam tais informações.
 
 %\todo[inline]{}
 
 \section{Adição de \textit{features}}
 %Dos dados listados acima, apenas 18 são disponibilizados diretamente pelos servidores do CENSIPAM. Os demais dados têm de ser produzidos a partir de outros conjuntos de dados disponibilizados por diferentes entidades. 
 
-A produção destes dados para a adição ao banco do CENSIPAM envolve o cruzamento com dados de diversas outras entidades. Sua produção se dá pelo cálculo da intersecção geográfica dos eventos de fogo e diversos mapas disponibilizadas pelas entidades Terrabrasilis \cite{terrabrasilis}, MapBiomas \cite{MapBiomasQueimadas} e GFED \cite{gfed}.
+A produção destes dados para a adição ao banco do Censipam envolve o cruzamento com dados de diversas outras entidades. Sua produção se dá pelo cálculo da intersecção geográfica dos eventos de fogo e diversos mapas disponibilizadas pelas entidades Terrabrasilis \cite{terrabrasilis}, MapBiomas \cite{MapBiomasQueimadas} e GFED \cite{gfed}.
 
 A partir das coordenadas dos focos de incêndio, é possível de se fazer uma comparação com outros mapas para se encontrar intersecções com áreas de interesse. Por exemplo, dados relativos à proximidade à áreas de conservação ambiental e áreas indígenas são produzidos pelo cruzamento com os dados disponíveis pelo Terrabrasilis. Já informações como desmatamento da área podem ser obtidas por meio do DETER \cite{deter}, enquanto informações Áreas Públicas, Privadas, Desconhecidas e Áreas de Cadastro Ambiental Rural são obtidas a partir do Cadastro Ambiental Rural \cite{cadastro-rural}.
 
