@@ -38,7 +38,7 @@ Censipam.
 7. Conclusion
 
 <a name="conclusion"></a>
-##Conclusion
+## Conclusion
 The presented work aimed to develop a wildfire classification system for the Legal Amazon territory, through a time series artificial intelligence algorithm. Additionally, it was also developed with the purpose of eventually being integrated into the Censipam Fire Panel system.
 
 
